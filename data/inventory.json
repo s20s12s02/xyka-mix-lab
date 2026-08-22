@@ -1,0 +1,1234 @@
+[
+  {
+    "id": "sebero-honey-melon",
+    "brand": "Sebero",
+    "line": "Classic",
+    "name": "Honey Melon — Медовая дыня",
+    "shortName": "медовая дыня",
+    "profile": "Сочная спелая дыня с мягкой медовой сладостью.",
+    "tags": [
+      "дыня",
+      "мёд",
+      "сладость"
+    ],
+    "families": [
+      "melon",
+      "honey",
+      "fruit"
+    ],
+    "directionWeights": {
+      "fruit": 1.0,
+      "dessert": 0.45,
+      "drink": 0.25
+    },
+    "strengthIndex": 3.0,
+    "strengthLabel": "Лёгкая",
+    "aromaPower": 3,
+    "maxShare": 70,
+    "heatResistance": "средняя",
+    "heatRank": 2,
+    "warnings": [],
+    "rating": {
+      "value": 4.5,
+      "votes": 39,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Светлая линейка; пользовательские отзывы размещают вкус внутри лёгкого диапазона, без повышения по маркетинговой категории.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "sebero-strawberry",
+    "brand": "Sebero",
+    "line": "Classic",
+    "name": "Strawberry — Клубника",
+    "shortName": "клубника",
+    "profile": "Сочная сладкая клубника без холодка.",
+    "tags": [
+      "клубника",
+      "ягода",
+      "сладость"
+    ],
+    "families": [
+      "strawberry",
+      "berry",
+      "fruit"
+    ],
+    "directionWeights": {
+      "berry": 1.0,
+      "fruit": 0.45,
+      "dessert": 0.25
+    },
+    "strengthIndex": 3.0,
+    "strengthLabel": "Лёгкая",
+    "aromaPower": 3,
+    "maxShare": 70,
+    "heatResistance": "средняя",
+    "heatRank": 2,
+    "warnings": [],
+    "rating": null,
+    "calibrationNote": "Светлая линейка; пользовательские отзывы размещают вкус внутри лёгкого диапазона, без повышения по маркетинговой категории.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "sebero-energetik",
+    "brand": "Sebero",
+    "line": "Classic",
+    "name": "Energetik — Энергетик",
+    "shortName": "энергетик",
+    "profile": "Сладко-кислый профиль энергетического напитка без ледяного эффекта.",
+    "tags": [
+      "энергетик",
+      "напиток",
+      "кисло-сладкий"
+    ],
+    "families": [
+      "energy",
+      "citrus",
+      "drink"
+    ],
+    "directionWeights": {
+      "drink": 1.0,
+      "citrus": 0.45,
+      "unusual": 0.2
+    },
+    "strengthIndex": 3.5,
+    "strengthLabel": "Средне-лёгкая",
+    "aromaPower": 4,
+    "maxShare": 65,
+    "heatResistance": "средняя",
+    "heatRank": 2,
+    "warnings": [],
+    "rating": {
+      "value": 4.4,
+      "votes": 51,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Светлая линейка; пользовательские отзывы размещают вкус внутри лёгкого диапазона, без повышения по маркетинговой категории.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "sebero-watermelon-melon-cola",
+    "brand": "Sebero",
+    "line": "Classic",
+    "name": "Арбузно-дынная кола",
+    "shortName": "арбузная кола",
+    "profile": "Фруктовая кола с арбузом и дыней, сладкая и округлая.",
+    "tags": [
+      "арбуз",
+      "дыня",
+      "кола",
+      "напиток"
+    ],
+    "families": [
+      "watermelon",
+      "melon",
+      "cola",
+      "drink"
+    ],
+    "directionWeights": {
+      "drink": 0.95,
+      "fruit": 0.85,
+      "unusual": 0.2
+    },
+    "strengthIndex": 3.5,
+    "strengthLabel": "Средне-лёгкая",
+    "aromaPower": 4,
+    "maxShare": 65,
+    "heatResistance": "средняя",
+    "heatRank": 2,
+    "warnings": [],
+    "rating": {
+      "value": 4.0,
+      "votes": 18,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Светлая линейка; пользовательские отзывы размещают вкус внутри лёгкого диапазона, без повышения по маркетинговой категории.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "jent-lemon-pie",
+    "brand": "JENT",
+    "line": "Classic",
+    "name": "Lemon Pie — Лимонный пирог",
+    "shortName": "лимонный пирог",
+    "profile": "Лимонный крем и выпечка с умеренной сладостью.",
+    "tags": [
+      "лимон",
+      "пирог",
+      "крем",
+      "выпечка"
+    ],
+    "families": [
+      "lemon",
+      "pastry",
+      "cream",
+      "citrus"
+    ],
+    "directionWeights": {
+      "dessert": 1.0,
+      "citrus": 0.8
+    },
+    "strengthIndex": 4.0,
+    "strengthLabel": "Средне-лёгкая",
+    "aromaPower": 4,
+    "maxShare": 65,
+    "heatResistance": "средняя",
+    "heatRank": 2,
+    "warnings": [],
+    "rating": {
+      "value": 4.6,
+      "votes": 32,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Официальная средняя крепость смягчена пользовательским восприятием до средне-лёгкой зоны.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "jent-tropez",
+    "brand": "JENT",
+    "line": "Classic",
+    "name": "Tropez — Лимон",
+    "shortName": "лимон Tropez",
+    "profile": "Яркий чистый лимон с цедрой и выразительной кислинкой.",
+    "tags": [
+      "лимон",
+      "цедра",
+      "кислота"
+    ],
+    "families": [
+      "lemon",
+      "peel",
+      "citrus"
+    ],
+    "directionWeights": {
+      "citrus": 1.0,
+      "fruit": 0.4,
+      "drink": 0.25
+    },
+    "strengthIndex": 4.0,
+    "strengthLabel": "Средне-лёгкая",
+    "aromaPower": 4,
+    "maxShare": 65,
+    "heatResistance": "средняя",
+    "heatRank": 2,
+    "warnings": [],
+    "rating": {
+      "value": 4.6,
+      "votes": 140,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Официальная средняя крепость смягчена пользовательским восприятием до средне-лёгкой зоны.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "sapphire-italian-tiramisu",
+    "brand": "Sapphire Crown",
+    "line": "Classic",
+    "name": "Italian Tiramisu",
+    "shortName": "тирамису",
+    "profile": "Кофейно-сливочный десерт с какао и мягким печеньем.",
+    "tags": [
+      "тирамису",
+      "кофе",
+      "сливки",
+      "какао"
+    ],
+    "families": [
+      "coffee",
+      "cream",
+      "cocoa",
+      "pastry"
+    ],
+    "directionWeights": {
+      "dessert": 1.0,
+      "drink": 0.25,
+      "unusual": 0.2
+    },
+    "strengthIndex": 4.5,
+    "strengthLabel": "Средняя",
+    "aromaPower": 4,
+    "maxShare": 60,
+    "heatResistance": "средняя",
+    "heatRank": 2,
+    "warnings": [],
+    "rating": {
+      "value": 4.4,
+      "votes": 63,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Стабильный средний сегмент по сырью и пользовательскому восприятию.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "sapphire-redberry",
+    "brand": "Sapphire Crown",
+    "line": "Classic",
+    "name": "Redberry — Брусника",
+    "shortName": "красная ягода",
+    "profile": "Терпкая красная ягода с заметной кислинкой.",
+    "tags": [
+      "брусника",
+      "красная ягода",
+      "кислота",
+      "терпкость"
+    ],
+    "families": [
+      "lingonberry",
+      "berry",
+      "tart"
+    ],
+    "directionWeights": {
+      "berry": 1.0,
+      "citrus": 0.35,
+      "drink": 0.25
+    },
+    "strengthIndex": 4.5,
+    "strengthLabel": "Средняя",
+    "aromaPower": 4,
+    "maxShare": 60,
+    "heatResistance": "средняя",
+    "heatRank": 2,
+    "warnings": [],
+    "rating": {
+      "value": 4.4,
+      "votes": 58,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Стабильный средний сегмент по сырью и пользовательскому восприятию.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "xperience-multy-fruity",
+    "brand": "Xperience by Darkside",
+    "line": "Core",
+    "name": "Multy Fruity",
+    "shortName": "тропический мультифрукт",
+    "profile": "Манго, папайя и гуава в плотной тропической композиции.",
+    "tags": [
+      "манго",
+      "папайя",
+      "гуава",
+      "тропики"
+    ],
+    "families": [
+      "mango",
+      "papaya",
+      "guava",
+      "tropical"
+    ],
+    "directionWeights": {
+      "fruit": 1.0,
+      "drink": 0.35,
+      "unusual": 0.2
+    },
+    "strengthIndex": 5.0,
+    "strengthLabel": "Средняя",
+    "aromaPower": 5,
+    "maxShare": 65,
+    "heatResistance": "высокая",
+    "heatRank": 3,
+    "warnings": [],
+    "rating": {
+      "value": 4.5,
+      "votes": 50,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Средняя крепость подтверждается сырьём линии и отзывами.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "severny-pink-flamingo",
+    "brand": "Северный",
+    "line": "Основная",
+    "name": "Розовый Фламинго",
+    "shortName": "розовый фламинго",
+    "profile": "Грейпфрут, малина, клубника и личи в готовой композиции.",
+    "tags": [
+      "грейпфрут",
+      "малина",
+      "клубника",
+      "личи"
+    ],
+    "families": [
+      "grapefruit",
+      "raspberry",
+      "strawberry",
+      "lychee"
+    ],
+    "directionWeights": {
+      "berry": 0.85,
+      "fruit": 0.75,
+      "citrus": 0.65
+    },
+    "strengthIndex": 5.0,
+    "strengthLabel": "Средняя",
+    "aromaPower": 5,
+    "maxShare": 60,
+    "heatResistance": "средняя",
+    "heatRank": 2,
+    "warnings": [],
+    "rating": {
+      "value": 4.3,
+      "votes": 62,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Средний диапазон без переноса маркетинговой категории в верх шкалы.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "severny-white-tea",
+    "brand": "Северный",
+    "line": "Основная",
+    "name": "Белый чай",
+    "shortName": "белый чай",
+    "profile": "Мягкий белый чай с фруктами и курагой.",
+    "tags": [
+      "белый чай",
+      "курага",
+      "фрукты",
+      "терпкость"
+    ],
+    "families": [
+      "white-tea",
+      "apricot",
+      "tea",
+      "fruit"
+    ],
+    "directionWeights": {
+      "tea": 1.0,
+      "fruit": 0.45,
+      "unusual": 0.25
+    },
+    "strengthIndex": 5.0,
+    "strengthLabel": "Средняя",
+    "aromaPower": 4,
+    "maxShare": 60,
+    "heatResistance": "средняя",
+    "heatRank": 2,
+    "warnings": [],
+    "rating": {
+      "value": 4.6,
+      "votes": 70,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Средняя линейка; чайная терпкость не повышает никотиновую крепость.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "severny-chifir",
+    "brand": "Северный",
+    "line": "Основная",
+    "name": "Чифир в сладость",
+    "shortName": "сладкий чифир",
+    "profile": "Насыщенный чёрный чай со сладким округлым телом.",
+    "tags": [
+      "чёрный чай",
+      "сладость",
+      "терпкость"
+    ],
+    "families": [
+      "black-tea",
+      "tea",
+      "tart",
+      "sweet"
+    ],
+    "directionWeights": {
+      "tea": 1.0,
+      "unusual": 0.45,
+      "drink": 0.25
+    },
+    "strengthIndex": 5.5,
+    "strengthLabel": "Средняя",
+    "aromaPower": 5,
+    "maxShare": 60,
+    "heatResistance": "средняя",
+    "heatRank": 2,
+    "warnings": [],
+    "rating": {
+      "value": 4.6,
+      "votes": 126,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Большой объём оценок подтверждает средний, местами ощутимый диапазон.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "severny-raspberry-ruby",
+    "brand": "Северный",
+    "line": "Основная",
+    "name": "Малиновый Руби",
+    "shortName": "малиновый руби",
+    "profile": "Малина и лесная земляника с фруктовой нотой киви.",
+    "tags": [
+      "малина",
+      "земляника",
+      "киви"
+    ],
+    "families": [
+      "raspberry",
+      "wild-strawberry",
+      "kiwi",
+      "berry"
+    ],
+    "directionWeights": {
+      "berry": 1.0,
+      "fruit": 0.6,
+      "citrus": 0.2
+    },
+    "strengthIndex": 5.0,
+    "strengthLabel": "Средняя",
+    "aromaPower": 5,
+    "maxShare": 60,
+    "heatResistance": "средняя",
+    "heatRank": 2,
+    "warnings": [],
+    "rating": {
+      "value": 4.2,
+      "votes": 20,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Средний диапазон, оценка консервативна из-за небольшого объёма голосов.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "trofimoffs-wild-strawberry",
+    "brand": "Trofimoff’s",
+    "line": "Burley",
+    "name": "Wild Strawberry — Дикая земляника",
+    "shortName": "дикая земляника",
+    "profile": "Натуральная земляника на плотном Burley с сухим табачным телом.",
+    "tags": [
+      "земляника",
+      "burley",
+      "сухость",
+      "ягода"
+    ],
+    "families": [
+      "wild-strawberry",
+      "berry",
+      "burley",
+      "dry"
+    ],
+    "directionWeights": {
+      "berry": 1.0,
+      "unusual": 0.3
+    },
+    "strengthIndex": 7.5,
+    "strengthLabel": "Крепкая",
+    "aromaPower": 5,
+    "maxShare": 70,
+    "heatResistance": "высокая",
+    "heatRank": 3,
+    "warnings": [],
+    "rating": {
+      "value": 4.5,
+      "votes": 118,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Burley и отзывы удерживают вкус в крепком диапазоне, но ниже уровня дохи.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "dogma-sakura",
+    "brand": "Dogma",
+    "line": "100%",
+    "name": "Сакура",
+    "shortName": "сакура",
+    "profile": "Цветущая сакура с сухим сигарным фоном.",
+    "tags": [
+      "сакура",
+      "цветы",
+      "сигарный лист"
+    ],
+    "families": [
+      "sakura",
+      "floral",
+      "cigar"
+    ],
+    "directionWeights": {
+      "floral": 1.0,
+      "unusual": 0.65,
+      "tea": 0.2
+    },
+    "strengthIndex": 7.5,
+    "strengthLabel": "Крепкая",
+    "aromaPower": 5,
+    "maxShare": 50,
+    "heatResistance": "высокая",
+    "heatRank": 3,
+    "warnings": [],
+    "rating": {
+      "value": 4.4,
+      "votes": 112,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Сигарное сырьё учитывается как крепкое, но не приравнивается к дохе или чистой особо крепкой безароматике.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "dogma-klubyana",
+    "brand": "Dogma",
+    "line": "100%",
+    "name": "Клубяна",
+    "shortName": "клубяна",
+    "profile": "Плотная клубнично-земляничная ароматика на сигарном сырье.",
+    "tags": [
+      "клубника",
+      "земляника",
+      "сигарный лист"
+    ],
+    "families": [
+      "strawberry",
+      "wild-strawberry",
+      "berry",
+      "cigar"
+    ],
+    "directionWeights": {
+      "berry": 1.0,
+      "fruit": 0.35,
+      "unusual": 0.25
+    },
+    "strengthIndex": 7.5,
+    "strengthLabel": "Крепкая",
+    "aromaPower": 5,
+    "maxShare": 65,
+    "heatResistance": "высокая",
+    "heatRank": 3,
+    "warnings": [],
+    "rating": {
+      "value": 4.4,
+      "votes": 97,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Сигарное сырьё учитывается как крепкое, но не приравнивается к дохе или чистой особо крепкой безароматике.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "dogma-gerlinad",
+    "brand": "Dogma",
+    "line": "100%",
+    "name": "Герлинад для него",
+    "shortName": "герлинад",
+    "profile": "Сухой парфюмерно-травяной профиль с древесным шлейфом.",
+    "tags": [
+      "парфюм",
+      "травы",
+      "древесность",
+      "сигарный лист"
+    ],
+    "families": [
+      "perfume",
+      "herbal",
+      "wood",
+      "cigar"
+    ],
+    "directionWeights": {
+      "floral": 0.8,
+      "unusual": 1.0,
+      "tea": 0.2
+    },
+    "strengthIndex": 7.0,
+    "strengthLabel": "Крепкая",
+    "aromaPower": 5,
+    "maxShare": 35,
+    "heatResistance": "высокая",
+    "heatRank": 3,
+    "warnings": [
+      "Использовать как яркий акцент: профиль может быстро доминировать."
+    ],
+    "rating": {
+      "value": 4.4,
+      "votes": 83,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Сигарное сырьё учитывается как крепкое, но не приравнивается к дохе или чистой особо крепкой безароматике.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "dogma-black-currant",
+    "brand": "Dogma",
+    "line": "100%",
+    "name": "Чёрная смородина",
+    "shortName": "чёрная смородина",
+    "profile": "Натуральная чёрная смородина с терпкой кожицей на сигарном сырье.",
+    "tags": [
+      "чёрная смородина",
+      "терпкость",
+      "сигарный лист"
+    ],
+    "families": [
+      "blackcurrant",
+      "berry",
+      "tart",
+      "cigar"
+    ],
+    "directionWeights": {
+      "berry": 1.0,
+      "tea": 0.2,
+      "drink": 0.2
+    },
+    "strengthIndex": 7.5,
+    "strengthLabel": "Крепкая",
+    "aromaPower": 5,
+    "maxShare": 65,
+    "heatResistance": "высокая",
+    "heatRank": 3,
+    "warnings": [],
+    "rating": {
+      "value": 4.6,
+      "votes": 91,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Сигарное сырьё учитывается как крепкое, но не приравнивается к дохе или чистой особо крепкой безароматике.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "dogma-izhevika",
+    "brand": "Dogma",
+    "line": "100%",
+    "name": "Ижевика",
+    "shortName": "ижевика",
+    "profile": "Тёмная ежевика с кисло-терпким краем на сигарном сырье.",
+    "tags": [
+      "ежевика",
+      "тёмная ягода",
+      "терпкость",
+      "сигарный лист"
+    ],
+    "families": [
+      "blackberry",
+      "berry",
+      "tart",
+      "cigar"
+    ],
+    "directionWeights": {
+      "berry": 1.0,
+      "citrus": 0.2,
+      "unusual": 0.2
+    },
+    "strengthIndex": 7.5,
+    "strengthLabel": "Крепкая",
+    "aromaPower": 5,
+    "maxShare": 65,
+    "heatResistance": "высокая",
+    "heatRank": 3,
+    "warnings": [],
+    "rating": {
+      "value": 4.6,
+      "votes": 53,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Сигарное сырьё учитывается как крепкое, но не приравнивается к дохе или чистой особо крепкой безароматике.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "dogma-krymskaya-lavanda",
+    "brand": "Dogma",
+    "line": "100%",
+    "name": "Крымская лаванда",
+    "shortName": "крымская лаванда",
+    "profile": "Натуральная ферментированная лаванда с сухим цветочно-травяным шлейфом.",
+    "tags": [
+      "лаванда",
+      "цветы",
+      "травы",
+      "сигарный лист"
+    ],
+    "families": [
+      "lavender",
+      "floral",
+      "herbal",
+      "cigar"
+    ],
+    "directionWeights": {
+      "floral": 1.0,
+      "tea": 0.5,
+      "unusual": 0.8
+    },
+    "strengthIndex": 7.5,
+    "strengthLabel": "Крепкая",
+    "aromaPower": 5,
+    "maxShare": 25,
+    "heatResistance": "высокая",
+    "heatRank": 3,
+    "warnings": [
+      "Цветочный аллерген: при чувствительности к лаванде рецепт не использовать.",
+      "Доля выше 25% может перекрыть остальные ноты."
+    ],
+    "rating": {
+      "value": 4.8,
+      "votes": 90,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Сигарное сырьё учитывается как крепкое, но не приравнивается к дохе или чистой особо крепкой безароматике.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "banger-evergreen",
+    "brand": "Banger",
+    "line": "Classic",
+    "name": "Evergreen — Фейхоа, можжевельник",
+    "shortName": "вечнозелёный фейхоа",
+    "profile": "Фейхоа и сухой можжевельник: фруктово-хвойная композиция.",
+    "tags": [
+      "фейхоа",
+      "можжевельник",
+      "хвоя",
+      "травы"
+    ],
+    "families": [
+      "feijoa",
+      "juniper",
+      "conifer",
+      "fruit"
+    ],
+    "directionWeights": {
+      "unusual": 1.0,
+      "fruit": 0.65,
+      "citrus": 0.25,
+      "drink": 0.2
+    },
+    "strengthIndex": 4.5,
+    "strengthLabel": "Средняя",
+    "aromaPower": 5,
+    "maxShare": 55,
+    "heatResistance": "высокая",
+    "heatRank": 3,
+    "warnings": [],
+    "rating": {
+      "value": 4.5,
+      "votes": 48,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Средний диапазон; хвойная сухость не считается никотиновой крепостью.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "satyr-california-cola",
+    "brand": "Satyr",
+    "line": "Classic",
+    "name": "California Cola",
+    "shortName": "калифорнийская кола",
+    "profile": "Пряная сладкая кола с сухим табачным фоном.",
+    "tags": [
+      "кола",
+      "специи",
+      "напиток"
+    ],
+    "families": [
+      "cola",
+      "spice",
+      "drink",
+      "dry"
+    ],
+    "directionWeights": {
+      "drink": 1.0,
+      "unusual": 0.45,
+      "dessert": 0.2
+    },
+    "strengthIndex": 6.0,
+    "strengthLabel": "Средняя",
+    "aromaPower": 5,
+    "maxShare": 65,
+    "heatResistance": "высокая",
+    "heatRank": 3,
+    "warnings": [],
+    "rating": {
+      "value": 4.5,
+      "votes": 206,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Большой объём отзывов удерживает вкус в верхней части среднего диапазона.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "bonche-brownie",
+    "brand": "Bonche",
+    "line": "Classic",
+    "name": "Brownie",
+    "shortName": "брауни",
+    "profile": "Тёмный шоколадный брауни с сухим сигарным телом.",
+    "tags": [
+      "брауни",
+      "шоколад",
+      "какао",
+      "сигарный лист"
+    ],
+    "families": [
+      "brownie",
+      "cocoa",
+      "chocolate",
+      "cigar"
+    ],
+    "directionWeights": {
+      "dessert": 1.0,
+      "unusual": 0.2
+    },
+    "strengthIndex": 7.5,
+    "strengthLabel": "Крепкая",
+    "aromaPower": 5,
+    "maxShare": 65,
+    "heatResistance": "высокая",
+    "heatRank": 3,
+    "warnings": [],
+    "rating": {
+      "value": 4.6,
+      "votes": 59,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Крепкая ароматизированная сигарная смесь, но не уровень дохи.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "bonche-cookie",
+    "brand": "Bonche",
+    "line": "X",
+    "name": "Cookie — Печенье",
+    "shortName": "сухое печенье",
+    "profile": "Сухое сливочное печенье на крепком сигарном сырье.",
+    "tags": [
+      "печенье",
+      "сливочность",
+      "сигарный лист"
+    ],
+    "families": [
+      "cookie",
+      "pastry",
+      "cream",
+      "cigar"
+    ],
+    "directionWeights": {
+      "dessert": 1.0,
+      "tea": 0.2
+    },
+    "strengthIndex": 7.5,
+    "strengthLabel": "Крепкая",
+    "aromaPower": 5,
+    "maxShare": 65,
+    "heatResistance": "высокая",
+    "heatRank": 3,
+    "warnings": [],
+    "rating": {
+      "value": 4.2,
+      "votes": 39,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Крепкая ароматизированная сигарная смесь, но не уровень дохи.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "bonche-caramel",
+    "brand": "Bonche",
+    "line": "X Notes",
+    "name": "Caramel — Карамель",
+    "shortName": "сухая карамель",
+    "profile": "Концентрированная сухая карамель для акцентной доли.",
+    "tags": [
+      "карамель",
+      "жжёный сахар",
+      "сигарный лист"
+    ],
+    "families": [
+      "caramel",
+      "burnt-sugar",
+      "dessert",
+      "cigar"
+    ],
+    "directionWeights": {
+      "dessert": 1.0,
+      "drink": 0.45,
+      "tea": 0.35,
+      "unusual": 0.2
+    },
+    "strengthIndex": 7.0,
+    "strengthLabel": "Крепкая",
+    "aromaPower": 5,
+    "maxShare": 20,
+    "heatResistance": "высокая",
+    "heatRank": 3,
+    "warnings": [
+      "Концентрированный модификатор: не превышать 20% в рецепте."
+    ],
+    "rating": {
+      "value": 4.7,
+      "votes": 86,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Крепкая концентрированная нота; ограничение доли важнее маркетингового названия линейки.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  },
+  {
+    "id": "kraken-medium-seco-peanut",
+    "brand": "Kraken",
+    "line": "Medium Seco",
+    "name": "Peanut — Арахис",
+    "shortName": "жареный арахис",
+    "profile": "Сухой жареный арахис на плотном листе Medium Seco.",
+    "tags": [
+      "арахис",
+      "орех",
+      "сухость"
+    ],
+    "families": [
+      "peanut",
+      "nut",
+      "roasted",
+      "dry"
+    ],
+    "directionWeights": {
+      "dessert": 0.85,
+      "unusual": 0.7,
+      "tea": 0.2
+    },
+    "strengthIndex": 7.5,
+    "strengthLabel": "Крепкая",
+    "aromaPower": 5,
+    "maxShare": 65,
+    "heatResistance": "высокая",
+    "heatRank": 3,
+    "warnings": [
+      "Арахис — распространённый пищевой аллерген."
+    ],
+    "rating": {
+      "value": 4.8,
+      "votes": 63,
+      "source": "HTReviews"
+    },
+    "calibrationNote": "Сырьё Medium Seco и поставленный пользователем якорь удерживают вкус в крепком диапазоне.",
+    "sources": [
+      {
+        "title": "HTReviews",
+        "url": "https://htreviews.org/"
+      },
+      {
+        "title": "Фото личной коллекции",
+        "url": "../research/source-photos/"
+      }
+    ]
+  }
+]

@@ -1,0 +1,34 @@
+{
+  "approvedMock": ".impeccable/mocks/option-b-step-ledger.png",
+  "produce": [],
+  "direct": [],
+  "semantic": [
+    {
+      "id": "paper-ground",
+      "implementation": "CSS background-color plus two low-contrast repeating-linear-gradient layers; no bitmap grain.",
+      "notes": "Keep contrast low so text remains crisp in light and dark themes.",
+      "qa_status": "accepted"
+    },
+    {
+      "id": "step-rail",
+      "implementation": "HTML ordered regions, CSS vertical rule and numbered circles; switches to horizontal progress legend on wide screens.",
+      "notes": "Numbers denote steps, never nicotine strength.",
+      "qa_status": "accepted"
+    },
+    {
+      "id": "direction-tabs",
+      "implementation": "Native buttons with clipped top corners, focus-visible outline and rectangular fallback.",
+      "notes": "Two columns on 390 px, one column at 375 px only when text wrapping would reduce touch height.",
+      "qa_status": "accepted"
+    },
+    {
+      "id": "recipe-docket",
+      "implementation": "Semantic article, CSS rules, inline SVG utility icons and text-based origin stamp.",
+      "notes": "No botanical mock illustration ships; real ingredients and percentages come from recipes.json.",
+      "qa_status": "accepted"
+    }
+  ],
+  "execution_order": ["paper-ground", "step-rail", "direction-tabs", "recipe-docket"],
+  "blockers": [],
+  "assumptions": ["All shipping visuals are code-native; the three PNG files are design references only."]
+}

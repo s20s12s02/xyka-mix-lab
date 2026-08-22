@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-22T23:53:40+03:00",
+  "title": "Design System: Моя рецептурная — XYKA PRO",
+  "extensions": {
+    "colorMeta": {
+      "primary-plum": {"role": "primary", "displayName": "Черничная слива", "canonical": "#702f4d", "tonalRamp": ["#2b111e", "#452033", "#702f4d", "#9a456b", "#bf6b8e", "#dca0b7", "#efd0dc", "#faeef3"]},
+      "accent-tea": {"role": "secondary", "displayName": "Чайный зелёный", "canonical": "#536b58", "tonalRamp": ["#18241b", "#304235", "#536b58", "#748c79", "#97ad9b", "#bacbbb", "#dce6dc", "#f2f6f2"]},
+      "accent-brass": {"role": "tertiary", "displayName": "Приглушённая латунь", "canonical": "#b48a52", "tonalRamp": ["#352610", "#65491f", "#8e692f", "#b48a52", "#cba875", "#dec49e", "#efe0c7", "#faf3e6"]},
+      "parchment": {"role": "neutral", "displayName": "Тёплый пергамент", "canonical": "#f3ebdd", "tonalRamp": ["#28231d", "#51493e", "#776e61", "#9e9486", "#c1b7a8", "#ded5c7", "#f3ebdd", "#fcf9f3"]},
+      "ink": {"role": "neutral", "displayName": "Плотные чернила", "canonical": "#25221f", "tonalRamp": ["#171412", "#25221f", "#4a443f", "#716861", "#998f87", "#bfb6ad", "#dfd8d1", "#f4f0eb"]}
+    },
+    "typographyMeta": {
+      "display": {"displayName": "Редакционный display", "purpose": "Главные заголовки и сильные управляющие подписи."},
+      "title": {"displayName": "Название рецепта", "purpose": "Плотные заголовки карточек и технологических секций."},
+      "body": {"displayName": "Читаемый UI-текст", "purpose": "Описания, инструкции и длинный контент."},
+      "label": {"displayName": "Журнальная метка", "purpose": "Вкладки, штампы и компактные состояния."}
+    },
+    "shadows": [
+      {"name": "paper-ambient", "value": "0 15px 38px rgba(69,48,35,.12), 0 3px 8px rgba(69,48,35,.08)", "purpose": "Отделяет самостоятельный лист от пергаментного поля."},
+      {"name": "drawer-lift", "value": "0 -18px 52px rgba(20,14,16,.28)", "purpose": "Отделяет подробный рецепт от затемнённого контекста."}
+    ],
+    "motion": [
+      {"name": "drawer-enter", "value": "260ms cubic-bezier(.16,1,.3,1)", "purpose": "Короткий подъём листа рецепта; отключается через prefers-reduced-motion."},
+      {"name": "state-transition", "value": "180ms ease-out", "purpose": "Цвет, маркер переключателя и короткие hover-состояния."}
+    ],
+    "breakpoints": [
+      {"name": "compact-copy", "value": "540px"},
+      {"name": "desktop-ledger", "value": "940px"},
+      {"name": "wide-recipes", "value": "1240px"}
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Recipe Action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Вырубленная сливовая плашка для запуска подбора.",
+      "html": "<button class=\"ds-primary\"><span>ПОДОБРАТЬ</span><small>8 рецептов</small></button>",
+      "css": ".ds-primary{min-height:54px;padding:8px 18px;display:grid;place-items:center;border:1px solid #702f4d;color:#fbf6ea;background:#702f4d;clip-path:polygon(0 8px,8px 8px,8px 0,calc(100% - 8px) 0,calc(100% - 8px) 8px,100% 8px,100% calc(100% - 8px),calc(100% - 8px) calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,8px calc(100% - 8px),0 calc(100% - 8px));font:700 1.28rem/1.05 'Arial Narrow',sans-serif;letter-spacing:.025em}.ds-primary small{font:600 .62rem/1.2 system-ui}.ds-primary:hover{background:#59233d}.ds-primary:focus-visible{outline:0;box-shadow:inset 0 0 0 3px #b48a52}"
+    },
+    {
+      "name": "Direction Tab",
+      "kind": "button",
+      "description": "Бумажная индексная вкладка направления.",
+      "html": "<button class=\"ds-tab\" aria-pressed=\"true\">Ягоды</button>",
+      "css": ".ds-tab{min-height:48px;padding:9px 7px 7px;border:1px solid #702f4d;color:#fbf6ea;background:#702f4d;clip-path:polygon(0 9px,14px 9px,19px 0,calc(100% - 19px) 0,calc(100% - 14px) 9px,100% 9px,100% 100%,0 100%);font:500 .9rem/1.15 'Arial Narrow',sans-serif}.ds-tab:focus-visible{outline:3px solid #b48a52;outline-offset:3px}"
+    },
+    {
+      "name": "Strength Choice",
+      "kind": "button",
+      "description": "Словесный выбор крепости без числовой шкалы.",
+      "html": "<button class=\"ds-strength\" aria-pressed=\"true\">Средняя</button>",
+      "css": ".ds-strength{min-height:44px;padding:8px 12px;border:1px solid #536b58;color:#fbf6ea;background:#536b58;font:500 .95rem/1.1 'Arial Narrow',sans-serif}.ds-strength:focus-visible{outline:3px solid #b48a52;outline-offset:3px}"
+    },
+    {
+      "name": "Origin Stamp",
+      "kind": "chip",
+      "description": "Честная метка происхождения рецепта.",
+      "html": "<span class=\"ds-stamp\">АДАПТИРОВАННЫЙ</span>",
+      "css": ".ds-stamp{display:inline-flex;min-height:26px;padding:4px 7px;align-items:center;border:1px solid #702f4d;color:#702f4d;background:transparent;font:700 .68rem/1 system-ui;letter-spacing:.04em;transform:rotate(-1.5deg)}"
+    },
+    {
+      "name": "Recipe Card",
+      "kind": "card",
+      "refersTo": "recipe-card",
+      "description": "Самостоятельный лист с названием, пропорциями и действиями.",
+      "html": "<article class=\"ds-card\"><span class=\"ds-card-label\">АВТОРСКИЙ</span><h3>Красная строка</h3><p>смородина · ежевика · клубника</p></article>",
+      "css": ".ds-card{padding:18px 16px 15px;border:1px solid rgba(37,34,31,.48);border-radius:14px;color:#25221f;background:#fbf6ea;box-shadow:0 15px 38px rgba(69,48,35,.12),0 3px 8px rgba(69,48,35,.08);font-family:system-ui}.ds-card h3{margin:12px 0 4px;font:700 1.52rem/1.05 'Arial Narrow',sans-serif}.ds-card p{margin:0;color:#675f57}.ds-card-label{color:#702f4d;font-size:.68rem;font-weight:700;letter-spacing:.04em}"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "description": "Прямоугольное поле поиска по нотам и табакам.",
+      "html": "<input class=\"ds-input\" type=\"search\" placeholder=\"Например, смородина\">",
+      "css": ".ds-input{width:100%;min-height:46px;padding:9px 11px;border:1px solid rgba(37,34,31,.48);border-radius:0;color:#25221f;background:#fbf6ea;font:400 1rem/1.48 system-ui}.ds-input::placeholder{color:#675f57}.ds-input:focus-visible{outline:3px solid #b48a52;outline-offset:3px}"
+    },
+    {
+      "name": "Bottom Navigation Item",
+      "kind": "nav",
+      "description": "Мобильный раздел приложения с линейным SVG.",
+      "html": "<button class=\"ds-nav\"><svg viewBox=\"0 0 24 24\"><path d=\"M5 4h14v16H5zM8 8h8M8 12h8M8 16h5\"/></svg><span>Подбор</span></button>",
+      "css": ".ds-nav{min-width:74px;min-height:52px;padding:4px 2px;display:grid;place-items:center;gap:1px;border:0;color:#702f4d;background:#fbf6ea;font:400 .65rem/1.2 system-ui}.ds-nav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7}.ds-nav:focus-visible{outline:3px solid #b48a52;outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Рецептурная мастерская",
+    "overview": "Интерфейс выглядит как рабочий журнал ароматиста: тёплая бумага, чернильные линии, индексные вкладки и небольшие штампы происхождения. Композиция практичная, редакционная и тактильная; каждое декоративное решение одновременно помогает ориентированию.",
+    "keyCharacteristics": ["двухшаговая журнальная навигация", "сливовый вкус и действие, чайный зелёный крепость и подтверждение", "узкий display рядом с нейтральным sans", "бумажные поверхности и вырубленные углы", "светлая и тёмная системные темы"],
+    "rules": [
+      {"name": "Two-Ink Rule", "body": "Слива означает вкус или действие, зелёный — крепость или подтверждённое состояние; не менять эти роли местами.", "section": "colors"},
+      {"name": "Editorial Contrast Rule", "body": "Display отвечает за ориентиры и названия; не использовать его для длинных абзацев.", "section": "typography"},
+      {"name": "Paper Stack Rule", "body": "Тень означает отдельный лист; секции одного листа разделяются линиями.", "section": "elevation"}
+    ],
+    "dos": ["Do связывать декоративную линию с реальной журнальной структурой или измерением.", "Do показывать состояние цветом, подписью и нативной семантикой одновременно.", "Do сохранять выбор и два главных действия в первом мобильном экране.", "Do использовать встроенный SVG для всех служебных иконок."],
+    "donts": ["Don't превращать интерфейс в магазинную сетку или клубный чёрно-золотой лаунж.", "Don't использовать градиентный текст, стекло, неон или жёсткие декоративные тени.", "Don't добавлять случайную бумажную текстуру без пользы для читаемости и автономности.", "Don't кодировать крепость числом в пользовательском интерфейсе."]
+  }
+}

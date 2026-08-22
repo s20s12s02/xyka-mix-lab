@@ -1,0 +1,350 @@
+[
+  {
+    "sourceComponent": "ананас",
+    "replacementIds": [
+      "xperience-multy-fruity"
+    ],
+    "criteria": {
+      "aroma": 0.85,
+      "role": 0.9,
+      "sensory": 0.8,
+      "strength": 0.85,
+      "heat": 0.8,
+      "leaf": 0.9
+    },
+    "similarity": 0.85,
+    "confidence": "высокая",
+    "differences": "Тропическое тело сохраняется; вместо чистого ананаса появятся манго, папайя и гуава.",
+    "allowedRoles": [
+      "основа",
+      "связка",
+      "акцент"
+    ],
+    "maxTotalShare": 70
+  },
+  {
+    "sourceComponent": "черника",
+    "replacementIds": [
+      "dogma-izhevika"
+    ],
+    "criteria": {
+      "aroma": 0.82,
+      "role": 0.9,
+      "sensory": 0.82,
+      "strength": 0.75,
+      "heat": 0.9,
+      "leaf": 0.7
+    },
+    "similarity": 0.83,
+    "confidence": "высокая",
+    "differences": "Тёмная ягода и терпкость сохраняются; ежевика менее конфетная и заметно крепче.",
+    "allowedRoles": [
+      "основа",
+      "связка",
+      "акцент"
+    ],
+    "maxTotalShare": 70
+  },
+  {
+    "sourceComponent": "чай масала",
+    "replacementIds": [
+      "severny-chifir"
+    ],
+    "criteria": {
+      "aroma": 0.72,
+      "role": 0.92,
+      "sensory": 0.62,
+      "strength": 0.82,
+      "heat": 0.85,
+      "leaf": 0.95
+    },
+    "similarity": 0.78,
+    "confidence": "средняя",
+    "differences": "Сохраняется насыщенная чайная база, но специи масала не имитируются и композиция становится чище.",
+    "allowedRoles": [
+      "основа",
+      "связка",
+      "акцент"
+    ],
+    "maxTotalShare": 70
+  },
+  {
+    "sourceComponent": "ройбуш с карамелью",
+    "replacementIds": [
+      "severny-white-tea",
+      "bonche-caramel"
+    ],
+    "criteria": {
+      "aroma": 0.84,
+      "role": 0.92,
+      "sensory": 0.82,
+      "strength": 0.78,
+      "heat": 0.84,
+      "leaf": 0.88
+    },
+    "similarity": 0.85,
+    "confidence": "высокая",
+    "differences": "Белый чай даёт настой, Bonche Caramel — сухую карамель; связка крепче и светлее ройбуша.",
+    "allowedRoles": [
+      "основа",
+      "связка",
+      "акцент"
+    ],
+    "maxTotalShare": 80
+  },
+  {
+    "sourceComponent": "банан",
+    "replacementIds": [
+      "sebero-honey-melon"
+    ],
+    "criteria": {
+      "aroma": 0.7,
+      "role": 0.82,
+      "sensory": 0.76,
+      "strength": 0.95,
+      "heat": 0.88,
+      "leaf": 0.92
+    },
+    "similarity": 0.8,
+    "confidence": "высокая",
+    "differences": "Сохраняется сладкий округлый фруктовый мостик, но банановая крахмалистость сменяется дынной сочностью.",
+    "allowedRoles": [
+      "основа",
+      "связка",
+      "акцент"
+    ],
+    "maxTotalShare": 70
+  },
+  {
+    "sourceComponent": "Banger Crumble",
+    "replacementIds": [
+      "bonche-brownie"
+    ],
+    "criteria": {
+      "aroma": 0.82,
+      "role": 0.94,
+      "sensory": 0.84,
+      "strength": 0.72,
+      "heat": 0.9,
+      "leaf": 0.76
+    },
+    "similarity": 0.84,
+    "confidence": "высокая",
+    "differences": "Обе ноты работают как плотная десертная база; брауни темнее, суше и крепче крамбла.",
+    "allowedRoles": [
+      "основа",
+      "связка",
+      "акцент"
+    ],
+    "maxTotalShare": 70
+  },
+  {
+    "sourceComponent": "ваниль",
+    "replacementIds": [
+      "sapphire-italian-tiramisu"
+    ],
+    "criteria": {
+      "aroma": 0.72,
+      "role": 0.86,
+      "sensory": 0.8,
+      "strength": 0.82,
+      "heat": 0.86,
+      "leaf": 0.88
+    },
+    "similarity": 0.8,
+    "confidence": "высокая",
+    "differences": "Сливочная связка сохраняется, но появляется кофе и какао; доля ограничена акцентом.",
+    "allowedRoles": [
+      "основа",
+      "связка",
+      "акцент"
+    ],
+    "maxTotalShare": 70
+  },
+  {
+    "sourceComponent": "лимонный леденец",
+    "replacementIds": [
+      "jent-lemon-pie"
+    ],
+    "criteria": {
+      "aroma": 0.78,
+      "role": 0.88,
+      "sensory": 0.76,
+      "strength": 0.86,
+      "heat": 0.88,
+      "leaf": 0.92
+    },
+    "similarity": 0.83,
+    "confidence": "высокая",
+    "differences": "Лимон сохраняется, а конфетное тело заменяется мягкой выпечкой.",
+    "allowedRoles": [
+      "основа",
+      "связка",
+      "акцент"
+    ],
+    "maxTotalShare": 70
+  },
+  {
+    "sourceComponent": "красный апельсин",
+    "replacementIds": [
+      "jent-tropez"
+    ],
+    "criteria": {
+      "aroma": 0.8,
+      "role": 0.9,
+      "sensory": 0.82,
+      "strength": 0.9,
+      "heat": 0.88,
+      "leaf": 0.92
+    },
+    "similarity": 0.85,
+    "confidence": "высокая",
+    "differences": "Цитрусовая кислотность и цедра сохраняются; профиль становится лимонным и суше.",
+    "allowedRoles": [
+      "основа",
+      "связка",
+      "акцент"
+    ],
+    "maxTotalShare": 70
+  },
+  {
+    "sourceComponent": "тёмный шоколад",
+    "replacementIds": [
+      "bonche-brownie"
+    ],
+    "criteria": {
+      "aroma": 0.92,
+      "role": 0.96,
+      "sensory": 0.9,
+      "strength": 0.92,
+      "heat": 0.96,
+      "leaf": 0.96
+    },
+    "similarity": 0.93,
+    "confidence": "высокая",
+    "differences": "Брауни сохраняет тёмный шоколад и добавляет текстуру выпечки.",
+    "allowedRoles": [
+      "основа",
+      "связка",
+      "акцент"
+    ],
+    "maxTotalShare": 70
+  },
+  {
+    "sourceComponent": "чернослив",
+    "replacementIds": [
+      "dogma-black-currant"
+    ],
+    "criteria": {
+      "aroma": 0.7,
+      "role": 0.84,
+      "sensory": 0.78,
+      "strength": 0.92,
+      "heat": 0.92,
+      "leaf": 0.9
+    },
+    "similarity": 0.81,
+    "confidence": "высокая",
+    "differences": "Тёмная терпкая фруктовость сохраняется, но сухофрукт заменяется свежей смородиновой кожицей.",
+    "allowedRoles": [
+      "основа",
+      "связка",
+      "акцент"
+    ],
+    "maxTotalShare": 70
+  },
+  {
+    "sourceComponent": "ирга",
+    "replacementIds": [
+      "dogma-izhevika"
+    ],
+    "criteria": {
+      "aroma": 0.78,
+      "role": 0.9,
+      "sensory": 0.84,
+      "strength": 0.92,
+      "heat": 0.92,
+      "leaf": 0.9
+    },
+    "similarity": 0.85,
+    "confidence": "высокая",
+    "differences": "Тёмная суховатая ягода сохраняется; ежевика чуть кислее.",
+    "allowedRoles": [
+      "основа",
+      "связка",
+      "акцент"
+    ],
+    "maxTotalShare": 70
+  },
+  {
+    "sourceComponent": "смородина-апельсин-виноград",
+    "replacementIds": [
+      "dogma-black-currant",
+      "jent-tropez"
+    ],
+    "criteria": {
+      "aroma": 0.84,
+      "role": 0.9,
+      "sensory": 0.82,
+      "strength": 0.8,
+      "heat": 0.88,
+      "leaf": 0.82
+    },
+    "similarity": 0.85,
+    "confidence": "высокая",
+    "differences": "Смородина остаётся ядром, лимон Tropez заменяет цитрусовую часть; виноградная сладость уменьшается.",
+    "allowedRoles": [
+      "основа",
+      "связка",
+      "акцент"
+    ],
+    "maxTotalShare": 80
+  },
+  {
+    "sourceComponent": "клубничный сорбет",
+    "replacementIds": [
+      "sebero-strawberry"
+    ],
+    "criteria": {
+      "aroma": 0.9,
+      "role": 0.92,
+      "sensory": 0.82,
+      "strength": 0.88,
+      "heat": 0.86,
+      "leaf": 0.92
+    },
+    "similarity": 0.89,
+    "confidence": "высокая",
+    "differences": "Сохраняется клубничная сладость, а охлаждающая ассоциация сорбета намеренно исключается.",
+    "allowedRoles": [
+      "основа",
+      "связка",
+      "акцент"
+    ],
+    "maxTotalShare": 70
+  },
+  {
+    "sourceComponent": "ягодный пунш",
+    "replacementIds": [
+      "sapphire-redberry",
+      "severny-raspberry-ruby"
+    ],
+    "criteria": {
+      "aroma": 0.9,
+      "role": 0.94,
+      "sensory": 0.88,
+      "strength": 0.86,
+      "heat": 0.88,
+      "leaf": 0.9
+    },
+    "similarity": 0.9,
+    "confidence": "высокая",
+    "differences": "Две ягоды дают кислую и сладкую части пунша без алкогольного профиля.",
+    "allowedRoles": [
+      "основа",
+      "связка",
+      "акцент"
+    ],
+    "maxTotalShare": 80
+  }
+]
