@@ -44,8 +44,9 @@ function filteredIds(value, allowed) {
 
 export function normalizeState(rawState, catalogs) {
   const raw = rawState && typeof rawState === "object" ? rawState : {};
-  const directions = [...catalogs.directions];
-  const strengths = [...catalogs.strengths];
+  const migratedDirection = raw.direction === "tea"
+    ? "drink"
+    : (raw.direction === "floral" ? "unusual" : raw.direction);
   const availableIds = Array.isArray(raw.availableIds)
     ? filteredIds(raw.availableIds, catalogs.inventoryIds)
     : [...catalogs.inventoryIds];
@@ -53,8 +54,8 @@ export function normalizeState(rawState, catalogs) {
     availableIds,
     favoriteIds: filteredIds(raw.favoriteIds, catalogs.recipeIds),
     triedIds: filteredIds(raw.triedIds, catalogs.recipeIds),
-    direction: catalogs.directions.has(raw.direction) ? raw.direction : directions[0],
-    strength: catalogs.strengths.has(raw.strength) ? raw.strength : (catalogs.strengths.has("Средняя") ? "Средняя" : strengths[0]),
+    direction: catalogs.directions.has(migratedDirection) ? migratedDirection : null,
+    strength: raw.strength === "любая" || catalogs.strengths.has(raw.strength) ? (raw.strength || "любая") : "любая",
     componentCount: [2, 3, 4].includes(Number(raw.componentCount)) ? Number(raw.componentCount) : "любое",
     confidence: ["высокая", "средняя"].includes(raw.confidence) ? raw.confidence : "любая",
     view: ["finder", "pantry", "favorites", "tried"].includes(raw.view) ? raw.view : "finder",
@@ -68,19 +69,42 @@ export function selectRandomRecipe(recipes, random = Math.random) {
   return recipes[index];
 }
 
-export function searchRecipes(recipes, query) {
-  const normalized = String(query || "").trim().toLocaleLowerCase("ru-RU");
-  if (!normalized) return recipes;
+function normalizeSearchText(value) {
+  return String(value || "")
+    .toLocaleLowerCase("ru-RU")
+    .replaceAll("ё", "е")
+    .replace(/[^a-zа-я0-9]+/gi, " ")
+    .trim();
+}
+
+function flattenText(value) {
+  if (Array.isArray(value)) return value.flatMap(flattenText);
+  if (value && typeof value === "object") return Object.values(value).flatMap(flattenText);
+  return [value];
+}
+
+export function searchRecipes(recipes, query, inventoryById = new Map()) {
+  const tokens = normalizeSearchText(query).split(/\s+/).filter(Boolean);
+  if (!tokens.length) return recipes;
   return recipes.filter((recipe) => {
+    const inventoryFields = recipe.components.flatMap((component) => {
+      const item = inventoryById.get(component.tobaccoId) || {};
+      return [item.brand, item.name, item.hook, item.profile, item.tags];
+    });
     const haystack = [
       recipe.name,
+      recipe.hook,
       recipe.directionLabel,
       recipe.strengthLabel,
       recipe.whyItWorks,
-      ...recipe.dominantNotes,
+      recipe.dominantNotes,
+      recipe.notePyramid,
+      recipe.taste,
       ...recipe.components.flatMap((component) => [component.brand, component.name]),
-    ].join(" ").toLocaleLowerCase("ru-RU");
-    return haystack.includes(normalized);
+      ...inventoryFields,
+    ];
+    const normalizedHaystack = normalizeSearchText(flattenText(haystack).join(" "));
+    return tokens.every((token) => normalizedHaystack.includes(token));
   });
 }
 
@@ -89,6 +113,23 @@ export function availableStrengths(recipes, direction, availableIds) {
     filterRecipes(recipes, { direction, strength: "любая", availableIds }).map((recipe) => recipe.strengthLabel),
   );
   return STRENGTH_ORDER.filter((label) => labels.has(label));
+}
+
+export function compositionSegments(components, inventoryById) {
+  let cumulative = 0;
+  return [...components]
+    .sort((first, second) => second.percent - first.percent)
+    .map((component) => {
+      const segment = {
+        tobaccoId: component.tobaccoId,
+        percent: component.percent,
+        color: inventoryById.get(component.tobaccoId)?.visualColor || "#777777",
+        dasharray: `${component.percent} ${100 - component.percent}`,
+        dashoffset: cumulative === 0 ? 0 : -cumulative,
+      };
+      cumulative += component.percent;
+      return segment;
+    });
 }
 
 export { STRENGTH_ORDER };

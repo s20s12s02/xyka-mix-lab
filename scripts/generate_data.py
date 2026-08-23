@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Sequence, Tuple
 
 
-DIRECTION_LABELS = {
+INTERNAL_DIRECTION_LABELS = {
     "dessert": "Десертное",
     "fruit": "Фруктово-тропическое",
     "berry": "Ягодное",
@@ -23,6 +23,18 @@ DIRECTION_LABELS = {
     "floral": "Цветочно-парфюмерное",
     "unusual": "Хвойно-травяное / необычное",
 }
+
+PUBLIC_DIRECTION_LABELS = {
+    "dessert": "Десерты",
+    "fruit": "Фрукты",
+    "berry": "Ягоды",
+    "citrus": "Цитрус",
+    "drink": "Напитки",
+    "unusual": "Необычное",
+}
+
+# Internal lanes stay unchanged so recipe IDs and compositions remain stable.
+DIRECTION_LABELS = INTERNAL_DIRECTION_LABELS
 
 ORIGIN_LABELS = {
     "exact": "Точный рецепт",
@@ -39,6 +51,35 @@ SOURCE_URLS = {
     "xyka-packings": "https://t.me/s/xyka_pro?q=%23XYKA_%D0%B7%D0%B0%D0%B8%D0%B2%D0%BA%D0%B8",
     "vanyazabey": "https://t.me/s/vanyazabeygroop",
     "htreviews": "https://htreviews.org/",
+}
+
+VISUAL_COLORS = {
+    "sebero-honey-melon": "#D9A441",
+    "sebero-strawberry": "#D9676B",
+    "sebero-energetik": "#C7A337",
+    "sebero-watermelon-melon-cola": "#B76A4A",
+    "jent-lemon-pie": "#D7B94A",
+    "jent-tropez": "#E2C94B",
+    "sapphire-italian-tiramisu": "#8A604C",
+    "sapphire-redberry": "#A94D5F",
+    "xperience-multy-fruity": "#E08A45",
+    "severny-pink-flamingo": "#D26A8A",
+    "severny-white-tea": "#A5A36C",
+    "severny-chifir": "#796755",
+    "severny-raspberry-ruby": "#B94F68",
+    "trofimoffs-wild-strawberry": "#A74B56",
+    "dogma-sakura": "#C78391",
+    "dogma-klubyana": "#9F4054",
+    "dogma-gerlinad": "#776A66",
+    "dogma-black-currant": "#69506F",
+    "dogma-izhevika": "#55445F",
+    "dogma-krymskaya-lavanda": "#8A7194",
+    "banger-evergreen": "#537C69",
+    "satyr-california-cola": "#875743",
+    "bonche-brownie": "#70483D",
+    "bonche-cookie": "#B58C63",
+    "bonche-caramel": "#B77842",
+    "kraken-medium-seco-peanut": "#9B7547",
 }
 
 
@@ -83,6 +124,7 @@ def _item(
         "name": name,
         "shortName": short_name,
         "profile": profile,
+        "hook": profile,
         "tags": list(tags),
         "families": list(families),
         "directionWeights": directions,
@@ -92,6 +134,8 @@ def _item(
         "maxShare": max_share,
         "heatResistance": heat_resistance,
         "heatRank": heat_rank,
+        "visualColor": VISUAL_COLORS[item_id],
+        "iconKey": f"tobacco:{item_id}",
         "warnings": list(warnings),
         "rating": {"value": rating, "votes": votes, "source": "HTReviews"} if rating is not None else None,
         "calibrationNote": calibration_note,
@@ -232,6 +276,32 @@ def _mix_strength(components: Sequence[Dict[str, Any]], by_id: Dict[str, Dict[st
     return round(sum(by_id[c["tobaccoId"]]["strengthIndex"] * c["percent"] for c in components) / 100, 1)
 
 
+PUBLIC_DIRECTION_TIE_ORDER = ("unusual", "drink", "berry", "dessert", "fruit", "citrus")
+
+
+def _public_direction(
+    internal_direction: str,
+    components: Sequence[Dict[str, Any]],
+    by_id: Dict[str, Dict[str, Any]],
+) -> str:
+    if internal_direction in PUBLIC_DIRECTION_LABELS:
+        return internal_direction
+    if internal_direction in {"tea", "drink"}:
+        return "drink"
+
+    scores = {direction: 0.0 for direction in PUBLIC_DIRECTION_LABELS}
+    for component in components:
+        weights = by_id[component["tobaccoId"]]["directionWeights"]
+        percent = component["percent"]
+        scores["dessert"] += weights.get("dessert", 0) * percent
+        scores["fruit"] += weights.get("fruit", 0) * percent
+        scores["berry"] += weights.get("berry", 0) * percent
+        scores["citrus"] += weights.get("citrus", 0) * percent
+        scores["drink"] += (weights.get("drink", 0) + weights.get("tea", 0)) * percent
+        scores["unusual"] += (weights.get("unusual", 0) + weights.get("floral", 0)) * percent
+    return max(PUBLIC_DIRECTION_TIE_ORDER, key=lambda direction: (scores[direction], -PUBLIC_DIRECTION_TIE_ORDER.index(direction)))
+
+
 def _packing_and_heat(components: Sequence[Dict[str, Any]], by_id: Dict[str, Dict[str, Any]]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     items = [by_id[c["tobaccoId"]] for c in components]
     aroma_range = max(i["aromaPower"] for i in items) - min(i["aromaPower"] for i in items)
@@ -242,10 +312,60 @@ def _packing_and_heat(components: Sequence[Dict[str, Any]], by_id: Dict[str, Dic
         detail = "Разложите компоненты отдельными секторами; самый яркий акцент — в меньшем секторе у края."
     elif strength_range >= 3:
         method = "слои"
-        detail = "Более крепкую и жаростойкую основу уложите нижним рыхлым слоем, лёгкие ноты — сверху без прижима."
+        detail = "Более жаростойкие и плотные компоненты кладите первыми, деликатные — последними, без прижима."
     else:
-        method = "перемешивание"
+        method = "компот"
         detail = "Мягко соедините компоненты вилкой до равномерности, не отжимая сироп."
+
+    orientation = {
+        "firstInCapsule": "Первым в пустую капсулу — после переворота ближе к нагревателю.",
+        "lastInCapsule": "Последним — после переворота дальше от нагревателя.",
+    }
+    if method == "компот":
+        names = ", ".join(by_id[c["tobaccoId"]]["shortName"] for c in components)
+        steps = [{
+            "order": 1,
+            "tobaccoIds": [c["tobaccoId"] for c in components],
+            "placement": "Смешать вне капсулы и уложить единым рыхлым объёмом.",
+            "reason": f"{names.capitalize()} близки по крепости, жаростойкости и силе аромата, поэтому раскрываются равномерно.",
+        }]
+    elif method == "сектора":
+        steps = []
+        for order, component in enumerate(components, 1):
+            item = by_id[component["tobaccoId"]]
+            steps.append({
+                "order": order,
+                "tobaccoIds": [component["tobaccoId"]],
+                "placement": f"Отдельный сектор площадью около {component['percent']}% капсулы.",
+                "reason": f"{item['shortName'].capitalize()} остаётся отделённым, чтобы яркость можно было контролировать тягой.",
+            })
+    else:
+        layer_order = sorted(
+            components,
+            key=lambda component: (
+                by_id[component["tobaccoId"]]["heatRank"],
+                by_id[component["tobaccoId"]]["strengthIndex"],
+                component["percent"],
+            ),
+            reverse=True,
+        )
+        grouped: List[List[Dict[str, Any]]] = []
+        for component in layer_order:
+            heat_rank = by_id[component["tobaccoId"]]["heatRank"]
+            if grouped and by_id[grouped[-1][0]["tobaccoId"]]["heatRank"] == heat_rank:
+                grouped[-1].append(component)
+            else:
+                grouped.append([component])
+        steps = []
+        for order, group in enumerate(grouped, 1):
+            names = ", ".join(by_id[c["tobaccoId"]]["shortName"] for c in group)
+            placement = "Первый рыхлый слой" if order == 1 else ("Последний рыхлый слой" if order == len(grouped) else "Средний рыхлый слой")
+            steps.append({
+                "order": order,
+                "tobaccoIds": [c["tobaccoId"] for c in group],
+                "placement": f"{placement}: {names}.",
+                "reason": "Более жаростойкие компоненты получают больше тепла; деликатные остаются дальше от нагревателя.",
+            })
 
     min_heat = min(i["heatRank"] for i in items)
     brands = {i["brand"] for i in items}
@@ -266,6 +386,8 @@ def _packing_and_heat(components: Sequence[Dict[str, Any]], by_id: Dict[str, Dic
         "method": method,
         "instructions": f"Отвесьте 10 г. {detail} Уложите смесь рыхло и сохраните свободную тягу; поверхность выровняйте без уплотнения.",
         "airflowCheck": "До установки нагревателя сделайте контрольную тягу: сопротивление не должно заметно расти.",
+        "orientation": orientation,
+        "steps": steps,
     }
     heat = {
         "mode": "ручной",
@@ -279,24 +401,96 @@ def _packing_and_heat(components: Sequence[Dict[str, Any]], by_id: Dict[str, Dic
 
 
 TITLE_BANK = {
-    "dessert": ["Тёплая витрина", "Какао-пауза", "Ореховый шов", "Пирог после дождя", "Карамельный полдень", "Сухой тирамису", "Ягодная кондитерская", "Печенье и цедра", "Тёмная крошка", "Дынный крем", "Брауни с характером", "Лимонная глазурь"],
-    "fruit": ["Тропический лист", "Розовый рынок", "Дынный горизонт", "Фруктовый атлас", "Манго на севере", "Фейхоа и солнце", "Арбузный маршрут", "Личи на полях", "Гуава в чернилах", "Спелый разворот", "Тёплые тропики", "Фруктовая экспедиция"],
-    "berry": ["Тёмная корзина", "Рубиновый след", "Смородиновый лист", "Земляничный архив", "Ягодная типография", "Ежевичный полдень", "Брусничная кромка", "Малиновый штамп", "Лесная заметка", "Красная строка", "Клубничный почерк", "Северная ягода"],
-    "citrus": ["Цедра на полях", "Лимонная линейка", "Кислая отметка", "Грейпфрутовый штрих", "Красный цитрус", "Солнечная кромка", "Лимон и хвоя", "Цитрусовый разворот", "Звонкая цедра", "Кислый маршрут", "Тонкий лимон", "Розовый цитрус"],
-    "tea": ["Чайный архив", "Белый настой", "Чифирный этюд", "Лавандовая чашка", "Терпкая полка", "Чай с тёмной ягодой", "Карамельный настой", "Курага в чайнике", "Цветочный чифир", "Северная заварка", "Сладкий лист", "Чайный гербарий"],
-    "drink": ["Красный энергос", "Кола на полях", "Ягодный тоник", "Тропический заряд", "Смородиновая кола", "Дынная газировка", "Рубиновый напиток", "Кислый заряд", "Фейхоа-тоник", "Карамельная кола", "Розовый лимонад", "Энергетический лист"],
-    "floral": ["Сакура в чернилах", "Лавандовый лист", "Крымский гербарий", "Цветочный почерк", "Парфюмерная строка", "Сад после чая", "Розовая бумага", "Сухой букет", "Фиолетовый штамп", "Цветы и ягоды", "Чайная лаванда", "Сакура и цедра"],
-    "unusual": ["Хвойная запись", "Фейхоа в лесу", "Можжевеловый лист", "Сухой гербарий", "Арахисовый чертёж", "Чайная мастерская", "Парфюмерный эскиз", "Кола и хвоя", "Терпкий маршрут", "Лесной штамп", "Сигарная ботаника", "Необычный разворот"],
+    "dessert": [
+        "Тёплая витрина", "Какао-пауза", "Ореховый шов", "Пирог после дождя", "Карамельный полдень", "Сухой тирамису", "Ягодная кондитерская", "Печенье и цедра", "Тёмная крошка", "Дынный крем", "Брауни с характером", "Лимонная глазурь",
+        "Шоколадная бумага", "Карамельный чертёж", "Ореховый вечер", "Тирамису в тени", "Лимонный бисквит", "Дынный мусс", "Какао и ягоды", "Сухая кондитерская", "Печенье на полях", "Тёмный десерт", "Ягодная глазурь", "Тёплый крамбл", "Ореховая крошка", "Шоколадный архив", "Карамельная глава", "Полночный брауни", "Лимонный крем", "Ягодный пирог", "Какао на полях", "Тихая кондитерская",
+    ],
+    "fruit": [
+        "Тропический лист", "Розовый рынок", "Дынный горизонт", "Фруктовый атлас", "Манго на севере", "Фейхоа и солнце", "Арбузный маршрут", "Личи на полях", "Гуава в чернилах", "Спелый разворот", "Тёплые тропики", "Фруктовая экспедиция",
+        "Дынный меридиан", "Арбузный полдень", "Фейхоа в саду", "Розовый фрукт", "Тропический штрих", "Манговый атлас", "Гуава на закате", "Личи в дымке", "Спелая глава", "Фруктовый почерк", "Южный маршрут", "Солнечный рынок", "Арбузная глава", "Дыня после дождя", "Манговый почерк", "Тропический полдень", "Фейхоа на полях", "Розовая гуава", "Личи и солнце", "Южный гербарий",
+    ],
+    "berry": [
+        "Тёмная корзина", "Рубиновый след", "Смородиновый лист", "Земляничный архив", "Ягодная типография", "Ежевичный полдень", "Брусничная кромка", "Малиновый штамп", "Лесная заметка", "Красная строка", "Клубничный почерк", "Северная ягода",
+        "Смородиновая ночь", "Малиновый архив", "Земляника в тени", "Ежевичный штрих", "Красная корзина", "Брусника на полях", "Ягодный разворот", "Тёмный рубин", "Лесная типография", "Клубничный лист", "Северный сбор", "Рубиновая кромка", "Смородиновый архив", "Малина после дождя", "Ежевичная строка", "Земляничный полдень", "Тёмная брусника", "Ягодный маршрут", "Красный гербарий", "Лесной рубин",
+    ],
+    "citrus": [
+        "Цедра на полях", "Лимонная линейка", "Кислая отметка", "Грейпфрутовый штрих", "Красный цитрус", "Солнечная кромка", "Лимон и хвоя", "Цитрусовый разворот", "Звонкая цедра", "Кислый маршрут", "Тонкий лимон", "Розовый цитрус",
+        "Лимонный отблеск", "Грейпфрутовый лист", "Цедровый архив", "Кислый полдень", "Розовая цедра", "Цитрус в тени", "Лимонный маршрут", "Звонкий грейпфрут", "Красный лимон", "Солнечный штамп", "Цитрусовая глава", "Кислая линия", "Грейпфрут на полях", "Лимон после дождя", "Цедровый почерк", "Розовый грейпфрут", "Солнечный лимон", "Кислый архив", "Цитрусовый лист", "Яркая цедра",
+    ],
+    "tea": [
+        "Чайный архив", "Белый настой", "Чифирный этюд", "Лавандовая чашка", "Терпкая полка", "Чай с тёмной ягодой", "Карамельный настой", "Курага в чайнике", "Цветочный чифир", "Северная заварка", "Сладкий лист", "Чайный гербарий",
+        "Белая заварка", "Чайный почерк", "Терпкий настой", "Лавандовый чай", "Чифирный лист", "Чайная пауза", "Сладкая заварка", "Курага и чай", "Северный настой", "Тёмная чашка", "Цветочный лист", "Чай на закате", "Белая чашка", "Терпкая заварка", "Чай после дождя", "Лавандовый настой", "Чифирный архив", "Сладкий чайник", "Курага в чашке", "Северный чай",
+    ],
+    "drink": [
+        "Красный энергос", "Кола на полях", "Ягодный тоник", "Тропический заряд", "Смородиновая кола", "Дынная газировка", "Рубиновый напиток", "Кислый заряд", "Фейхоа-тоник", "Карамельная кола", "Розовый лимонад", "Энергетический лист",
+        "Кола без спешки", "Энергос на полях", "Красный тоник", "Ягодная газировка", "Дынный лимонад", "Тропический тоник", "Розовая кола", "Кислый лимонад", "Фейхоа и кола", "Карамельный заряд", "Смородиновый тоник", "Газированный лист", "Красная газировка", "Кола после дождя", "Ягодный заряд", "Дынный тоник", "Тропический лимонад", "Розовый энергос", "Кислая кола", "Фейхоа на ходу",
+    ],
+    "floral": [
+        "Сакура в чернилах", "Лавандовый лист", "Крымский гербарий", "Цветочный почерк", "Парфюмерная строка", "Сад после чая", "Розовая бумага", "Сухой букет", "Фиолетовый штамп", "Цветы и ягоды", "Чайная лаванда", "Сакура и цедра",
+        "Сакура на полях", "Лаванда в тени", "Крымский букет", "Цветочный контур", "Парфюмерный штрих", "Сад в чернилах", "Розовый гербарий", "Сухая лаванда", "Фиолетовая строка", "Ягодный букет", "Чайный цветок", "Сакура на закате", "Лавандовый архив", "Крымский лист", "Цветы после дождя", "Розовый сад", "Сухой цветок", "Фиолетовый гербарий", "Сакура и чай", "Парфюмерная глава",
+    ],
+    "unusual": [
+        "Хвойная запись", "Фейхоа в лесу", "Можжевеловый лист", "Сухой гербарий", "Арахисовый чертёж", "Чайная мастерская", "Парфюмерный эскиз", "Кола и хвоя", "Терпкий маршрут", "Лесной штамп", "Сигарная ботаника", "Необычный разворот",
+        "Хвоя на полях", "Лесной фейхоа", "Можжевеловый штрих", "Сухая ботаника", "Арахисовый лист", "Чайный чертёж", "Парфюмерный архив", "Хвойная кола", "Терпкий гербарий", "Лесная гравюра", "Сигарный лист", "Дикая глава", "Можжевельник и чай", "Хвоя после дождя", "Арахисовая строка", "Сухой маршрут", "Парфюмерный лист", "Кола в лесу", "Терпкая ботаника", "Сигарный гербарий",
+    ],
 }
 
-
-def _recipe_title(direction: str, index: int, components: Sequence[Dict[str, Any]], by_id: Dict[str, Dict[str, Any]]) -> str:
-    bank = TITLE_BANK[direction]
+def _legacy_recipe_title(direction: str, index: int, components: Sequence[Dict[str, Any]], by_id: Dict[str, Dict[str, Any]]) -> str:
+    """Recreate the historical title only for the stable recipe identifier."""
+    bank = TITLE_BANK[direction][:12]
     base = bank[index % len(bank)]
     if index < len(bank):
         return base
     lead = by_id[components[0]["tobaccoId"]]["shortName"]
-    return f"{base} · {lead}"
+    accent = by_id[components[1]["tobaccoId"]]["shortName"]
+    cycle = index // len(bank)
+    if cycle == 1:
+        return f"{base} с нотой {lead}"
+    return f"{base} в оттенках {lead} и {accent}"
+
+
+def _recipe_title(direction: str, index: int, components: Sequence[Dict[str, Any]], by_id: Dict[str, Dict[str, Any]]) -> str:
+    bank = TITLE_BANK[direction]
+    if index >= len(bank):
+        raise ValueError(f"Title bank exhausted for {direction}: {index}")
+    return bank[index]
+
+
+HOOK_BALANCE = {
+    (70, 30): "Ведущий",
+    (65, 35): "Выразительный",
+    (60, 40): "Собранный",
+    (55, 45): "Ровный",
+    (60, 25, 15): "Чисто очерченный",
+    (55, 25, 20): "Сфокусированный",
+    (50, 30, 20): "Объёмный",
+    (45, 35, 20): "Плавный",
+    (40, 40, 20): "Двойной",
+    (40, 35, 25): "Многослойный",
+    (45, 25, 20, 10): "Глубокий",
+    (40, 30, 20, 10): "Точный",
+    (35, 30, 20, 15): "Тонко собранный",
+}
+
+
+def _recipe_hook(components: Sequence[Dict[str, Any]], by_id: Dict[str, Dict[str, Any]]) -> str:
+    percents = tuple(component["percent"] for component in components)
+    balance = HOOK_BALANCE.get(percents, "Сбалансированный")
+    names = [by_id[component["tobaccoId"]]["shortName"] for component in components]
+    if len(names) == 2:
+        return f"{balance} дуэт: {names[0]} ведёт, {names[1]} даёт оттенок."
+    if len(names) == 3:
+        return f"{balance} профиль: {names[0]} в основе, {names[1]} и {names[2]} дают оттенки."
+    return f"{balance} профиль: {names[0]} в основе, остальные ноты собирают объём."
+
+
+def _note_pyramid(components: Sequence[Dict[str, Any]], by_id: Dict[str, Dict[str, Any]]) -> Dict[str, List[str]]:
+    names = [by_id[component["tobaccoId"]]["shortName"] for component in components]
+    top = list(reversed(names[-2:]))
+    heart = names[:2]
+    strong_leaf = any(by_id[component["tobaccoId"]]["strengthIndex"] >= 6.5 for component in components)
+    base = [names[0], "сухой табачный фон" if strong_leaf else "мягкое ароматическое тело"]
+    return {"top": top, "heart": heart, "base": base}
 
 
 def _source_links(origin_type: str, origin_source: str | None = None) -> List[Dict[str, str]]:
@@ -319,7 +513,7 @@ def _make_recipe(
     source_key: str | None = None,
 ) -> Dict[str, Any]:
     components = []
-    for tobacco_id, percent in component_pairs:
+    for tobacco_id, percent in sorted(component_pairs, key=lambda pair: (-pair[1], pair[0])):
         item = by_id[tobacco_id]
         components.append({
             "tobaccoId": tobacco_id,
@@ -331,7 +525,7 @@ def _make_recipe(
         })
     strength = _mix_strength(components, by_id)
     packing, heat = _packing_and_heat(components, by_id)
-    ordered = sorted(components, key=lambda c: c["percent"], reverse=True)
+    ordered = components
     notes = [by_id[c["tobaccoId"]]["profile"] for c in ordered]
     warnings = sorted({warning for c in components for warning in by_id[c["tobaccoId"]]["warnings"]})
     dominant = []
@@ -341,22 +535,26 @@ def _make_recipe(
                 dominant.append(tag)
     origin = dict(origin)
     origin.setdefault("label", ORIGIN_LABELS[origin["type"]])
+    public_direction = _public_direction(direction, components, by_id)
     return {
         "id": recipe_id,
         "name": name,
-        "directions": [direction],
-        "directionLabel": DIRECTION_LABELS[direction],
+        "directions": [public_direction],
+        "generationDirections": [direction],
+        "directionLabel": PUBLIC_DIRECTION_LABELS[public_direction],
         "components": components,
         "strengthIndex": strength,
         "strengthLabel": strength_label(strength),
         "confidence": confidence,
+        "hook": _recipe_hook(ordered, by_id),
         "dominantNotes": dominant[:5],
+        "notePyramid": _note_pyramid(ordered, by_id),
         "taste": {
             "start": f"Сначала раскрывается {ordered[0]['name'].split(' — ')[-1].lower()}: {notes[0].lower()}",
             "middle": f"В середине подключается {ordered[1]['name'].split(' — ')[-1].lower()}, делая профиль объёмнее и ровнее.",
             "aftertaste": f"В послевкусии остаются {', '.join(dominant[1:4]) or dominant[0]}, без холодящего эффекта.",
         },
-        "whyItWorks": f"Композиция строится вокруг направления «{DIRECTION_LABELS[direction]}»: ведущая нота задаёт тему, связка добавляет переход, а акцент не превышает допустимую долю и не перекрывает основу.",
+        "whyItWorks": f"Композиция строится вокруг направления «{PUBLIC_DIRECTION_LABELS[public_direction]}»: ведущая нота задаёт тему, связка добавляет переход, а акцент не перекрывает основу.",
         "packing": packing,
         "heat": heat,
         "origin": origin,
@@ -450,7 +648,7 @@ def build_recipes(inventory: Sequence[Dict[str, Any]], analogs: Sequence[Dict[st
     recipes = _adapted_recipes(by_id, analogs)
     signatures = {_signature([(c["tobaccoId"], c["percent"]) for c in r["components"]]) for r in recipes}
     usage = Counter(c["tobaccoId"] for r in recipes for c in r["components"])
-    coverage = Counter((r["directions"][0], r["strengthLabel"]) for r in recipes)
+    coverage = Counter((r["generationDirections"][0], r["strengthLabel"]) for r in recipes)
     target_cells = [(direction, label) for direction in DIRECTION_LABELS for label in STRENGTH_TARGETS]
     target_cells.extend((direction, "Лёгкая") for direction in LIGHT_DIRECTIONS)
     title_index = defaultdict(int)
@@ -486,7 +684,8 @@ def build_recipes(inventory: Sequence[Dict[str, Any]], analogs: Sequence[Dict[st
             idx = title_index[direction]
             title_index[direction] += 1
             name = _recipe_title(direction, idx, components, by_id)
-            recipe_id = f"authored-{direction}-{label.lower().replace('ё', 'е').replace(' ', '-')}-{idx + 1:02d}-{_slug(name)}"
+            legacy_name = _legacy_recipe_title(direction, idx, components, by_id)
+            recipe_id = f"authored-{direction}-{label.lower().replace('ё', 'е').replace(' ', '-')}-{idx + 1:02d}-{_slug(legacy_name)}"
             origin_type = "experimental" if direction in {"floral", "unusual"} and score < .75 else "authored"
             origin = {
                 "type": origin_type,

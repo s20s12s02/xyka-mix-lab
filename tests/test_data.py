@@ -1,4 +1,5 @@
 import json
+import hashlib
 import math
 import re
 import tempfile
@@ -53,6 +54,18 @@ class InventoryContractTests(unittest.TestCase):
         self.assertNotIn("сыр", set(re.findall(r"[а-яё]+", "сигарное сырьё")))
         self.assertIn("аллерген", " ".join(self.by_id["dogma-krymskaya-lavanda"]["warnings"]).lower())
 
+    def test_inventory_has_visual_and_search_metadata(self):
+        colors = set()
+        icon_keys = set()
+        for item in self.inventory:
+            self.assertTrue(item.get("hook", "").strip(), item["id"])
+            self.assertRegex(item.get("visualColor", ""), r"^#[0-9a-fA-F]{6}$", item["id"])
+            self.assertTrue(item.get("iconKey", "").startswith("tobacco:"), item["id"])
+            colors.add(item.get("visualColor", "").lower())
+            icon_keys.add(item.get("iconKey", ""))
+        self.assertEqual(len(icon_keys), 26)
+        self.assertGreaterEqual(len(colors), 20)
+
 
 class AnalogContractTests(unittest.TestCase):
     def setUp(self):
@@ -103,6 +116,21 @@ class RecipeContractTests(unittest.TestCase):
             self.assertNotIn(signature, signatures)
             signatures.add(signature)
 
+    def test_recipe_ids_and_compositions_remain_stable(self):
+        pairs = sorted(
+            (
+                recipe["id"],
+                tuple(sorted((component["tobaccoId"], component["percent"]) for component in recipe["components"])),
+            )
+            for recipe in self.recipes
+        )
+        payload = json.dumps(pairs, ensure_ascii=False, separators=(",", ":"))
+        self.assertEqual(len(pairs), 216)
+        self.assertEqual(
+            hashlib.sha256(payload.encode("utf-8")).hexdigest(),
+            "9d793bd4e7d7659c74bb3c0bacd00af31d652ca280c193b10a099c34b8d8516f",
+        )
+
     def test_mix_strength_is_independently_recomputed_and_never_very_strong(self):
         for recipe in self.recipes:
             expected = round(
@@ -118,12 +146,15 @@ class RecipeContractTests(unittest.TestCase):
         self.assertEqual(set(usage), set(self.by_id))
         self.assertGreaterEqual(min(usage.values()), 5)
 
-    def test_each_available_direction_strength_cell_has_at_least_six_recipes(self):
+    def test_six_public_directions_each_have_strength_coverage(self):
         coverage = defaultdict(int)
         for recipe in self.recipes:
             for direction in recipe["directions"]:
                 coverage[(direction, recipe["strengthLabel"])] += 1
-        self.assertGreaterEqual(len({direction for direction, _ in coverage}), 8)
+        self.assertEqual(
+            {direction for direction, _ in coverage},
+            {"dessert", "fruit", "berry", "citrus", "drink", "unusual"},
+        )
         for cell, count in coverage.items():
             self.assertGreaterEqual(count, 6, cell)
 
@@ -140,9 +171,26 @@ class RecipeContractTests(unittest.TestCase):
 
     def test_recipes_have_complete_cooking_and_taste_guidance(self):
         for recipe in self.recipes:
-            self.assertIn(recipe["packing"]["method"], {"перемешивание", "сектора", "слои"})
+            self.assertIn(recipe["packing"]["method"], {"компот", "сектора", "слои"})
             self.assertIn("10 г", recipe["packing"]["instructions"])
             self.assertIn("рыхло", recipe["packing"]["instructions"].lower())
+            orientation = recipe["packing"].get("orientation", {})
+            self.assertTrue(orientation, recipe["id"])
+            self.assertIn("первым в пустую капсулу", orientation.get("firstInCapsule", "").lower())
+            self.assertIn("после переворота ближе к нагревателю", orientation.get("firstInCapsule", "").lower())
+            self.assertIn("последним", orientation.get("lastInCapsule", "").lower())
+            self.assertIn("после переворота дальше от нагревателя", orientation.get("lastInCapsule", "").lower())
+            self.assertTrue(recipe["packing"].get("steps"), recipe["id"])
+            packed_ids = {
+                tobacco_id
+                for step in recipe["packing"].get("steps", [])
+                for tobacco_id in step["tobaccoIds"]
+            }
+            self.assertEqual(packed_ids, {component["tobaccoId"] for component in recipe["components"]})
+            for step in recipe["packing"].get("steps", []):
+                self.assertGreaterEqual(step["order"], 1)
+                self.assertTrue(step["placement"])
+                self.assertTrue(step["reason"])
             self.assertGreaterEqual(recipe["heat"]["startC"], 220)
             self.assertLessEqual(recipe["heat"]["startC"], 315)
             self.assertGreaterEqual(recipe["heat"]["workC"], 220)
@@ -152,6 +200,28 @@ class RecipeContractTests(unittest.TestCase):
             self.assertTrue(recipe["taste"]["aftertaste"])
             self.assertTrue(recipe["whyItWorks"])
             self.assertTrue(recipe["sources"])
+
+    def test_recipe_names_hooks_notes_and_component_order_are_ui_ready(self):
+        names = [recipe["name"] for recipe in self.recipes]
+        hooks = [recipe.get("hook", "") for recipe in self.recipes]
+        self.assertEqual(len(set(names)), 216)
+        self.assertEqual(len(set(hooks)), 216)
+        for recipe in self.recipes:
+            self.assertNotIn("·", recipe["name"])
+            self.assertNotRegex(recipe["name"], r"\s\d+$")
+            self.assertNotIn(" с нотой ", recipe["name"].lower())
+            self.assertNotIn(" в оттенках ", recipe["name"].lower())
+            self.assertLessEqual(len(recipe["name"]), 42)
+            self.assertTrue(recipe.get("hook", ""), recipe["id"])
+            self.assertNotIn("·", recipe.get("hook", ""))
+            self.assertLessEqual(len(recipe.get("hook", "")), 110)
+            self.assertEqual(
+                [component["percent"] for component in recipe["components"]],
+                sorted((component["percent"] for component in recipe["components"]), reverse=True),
+            )
+            pyramid = recipe.get("notePyramid", {})
+            self.assertEqual(set(pyramid), {"top", "heart", "base"})
+            self.assertTrue(all(pyramid[level] for level in ("top", "heart", "base")))
 
     def test_write_outputs_produces_parseable_project_json(self):
         with tempfile.TemporaryDirectory() as temp_dir:

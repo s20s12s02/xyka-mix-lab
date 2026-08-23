@@ -1,0 +1,16 @@
+{
+  "profile": "product-admin",
+  "sourceRoots": ["src"],
+  "locale": "ru-RU",
+  "canonicalMap": "UX-CONTRACT.md",
+  "requiredCapabilities": ["Select/Listbox", "Form", "Scrollbar"],
+  "ownership": {
+    "Select/Listbox": "native"
+  },
+  "requiredCommands": ["data", "core", "build"],
+  "commands": {
+    "data": "python3 -m unittest -v tests.test_data",
+    "core": "node tests/core_behavior.mjs",
+    "build": "python3 -m unittest -v tests.test_build"
+  }
+}

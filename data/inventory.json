@@ -6,6 +6,7 @@
     "name": "Honey Melon — Медовая дыня",
     "shortName": "медовая дыня",
     "profile": "Сочная спелая дыня с мягкой медовой сладостью.",
+    "hook": "Сочная спелая дыня с мягкой медовой сладостью.",
     "tags": [
       "дыня",
       "мёд",
@@ -27,6 +28,8 @@
     "maxShare": 70,
     "heatResistance": "средняя",
     "heatRank": 2,
+    "visualColor": "#D9A441",
+    "iconKey": "tobacco:sebero-honey-melon",
     "warnings": [],
     "rating": {
       "value": 4.5,
@@ -52,6 +55,7 @@
     "name": "Strawberry — Клубника",
     "shortName": "клубника",
     "profile": "Сочная сладкая клубника без холодка.",
+    "hook": "Сочная сладкая клубника без холодка.",
     "tags": [
       "клубника",
       "ягода",
@@ -73,6 +77,8 @@
     "maxShare": 70,
     "heatResistance": "средняя",
     "heatRank": 2,
+    "visualColor": "#D9676B",
+    "iconKey": "tobacco:sebero-strawberry",
     "warnings": [],
     "rating": null,
     "calibrationNote": "Светлая линейка; пользовательские отзывы размещают вкус внутри лёгкого диапазона, без повышения по маркетинговой категории.",
@@ -94,6 +100,7 @@
     "name": "Energetik — Энергетик",
     "shortName": "энергетик",
     "profile": "Сладко-кислый профиль энергетического напитка без ледяного эффекта.",
+    "hook": "Сладко-кислый профиль энергетического напитка без ледяного эффекта.",
     "tags": [
       "энергетик",
       "напиток",
@@ -115,6 +122,8 @@
     "maxShare": 65,
     "heatResistance": "средняя",
     "heatRank": 2,
+    "visualColor": "#C7A337",
+    "iconKey": "tobacco:sebero-energetik",
     "warnings": [],
     "rating": {
       "value": 4.4,
@@ -140,6 +149,7 @@
     "name": "Арбузно-дынная кола",
     "shortName": "арбузная кола",
     "profile": "Фруктовая кола с арбузом и дыней, сладкая и округлая.",
+    "hook": "Фруктовая кола с арбузом и дыней, сладкая и округлая.",
     "tags": [
       "арбуз",
       "дыня",
@@ -163,6 +173,8 @@
     "maxShare": 65,
     "heatResistance": "средняя",
     "heatRank": 2,
+    "visualColor": "#B76A4A",
+    "iconKey": "tobacco:sebero-watermelon-melon-cola",
     "warnings": [],
     "rating": {
       "value": 4.0,
@@ -188,6 +200,7 @@
     "name": "Lemon Pie — Лимонный пирог",
     "shortName": "лимонный пирог",
     "profile": "Лимонный крем и выпечка с умеренной сладостью.",
+    "hook": "Лимонный крем и выпечка с умеренной сладостью.",
     "tags": [
       "лимон",
       "пирог",
@@ -210,6 +223,8 @@
     "maxShare": 65,
     "heatResistance": "средняя",
     "heatRank": 2,
+    "visualColor": "#D7B94A",
+    "iconKey": "tobacco:jent-lemon-pie",
     "warnings": [],
     "rating": {
       "value": 4.6,
@@ -235,6 +250,7 @@
     "name": "Tropez — Лимон",
     "shortName": "лимон Tropez",
     "profile": "Яркий чистый лимон с цедрой и выразительной кислинкой.",
+    "hook": "Яркий чистый лимон с цедрой и выразительной кислинкой.",
     "tags": [
       "лимон",
       "цедра",
@@ -256,6 +272,8 @@
     "maxShare": 65,
     "heatResistance": "средняя",
     "heatRank": 2,
+    "visualColor": "#E2C94B",
+    "iconKey": "tobacco:jent-tropez",
     "warnings": [],
     "rating": {
       "value": 4.6,
@@ -281,6 +299,7 @@
     "name": "Italian Tiramisu",
     "shortName": "тирамису",
     "profile": "Кофейно-сливочный десерт с какао и мягким печеньем.",
+    "hook": "Кофейно-сливочный десерт с какао и мягким печеньем.",
     "tags": [
       "тирамису",
       "кофе",
@@ -304,6 +323,8 @@
     "maxShare": 60,
     "heatResistance": "средняя",
     "heatRank": 2,
+    "visualColor": "#8A604C",
+    "iconKey": "tobacco:sapphire-italian-tiramisu",
     "warnings": [],
     "rating": {
       "value": 4.4,
@@ -329,6 +350,7 @@
     "name": "Redberry — Брусника",
     "shortName": "красная ягода",
     "profile": "Терпкая красная ягода с заметной кислинкой.",
+    "hook": "Терпкая красная ягода с заметной кислинкой.",
     "tags": [
       "брусника",
       "красная ягода",
@@ -351,6 +373,8 @@
     "maxShare": 60,
     "heatResistance": "средняя",
     "heatRank": 2,
+    "visualColor": "#A94D5F",
+    "iconKey": "tobacco:sapphire-redberry",
     "warnings": [],
     "rating": {
       "value": 4.4,
@@ -376,6 +400,7 @@
     "name": "Multy Fruity",
     "shortName": "тропический мультифрукт",
     "profile": "Манго, папайя и гуава в плотной тропической композиции.",
+    "hook": "Манго, папайя и гуава в плотной тропической композиции.",
     "tags": [
       "манго",
       "папайя",
@@ -399,6 +424,8 @@
     "maxShare": 65,
     "heatResistance": "высокая",
     "heatRank": 3,
+    "visualColor": "#E08A45",
+    "iconKey": "tobacco:xperience-multy-fruity",
     "warnings": [],
     "rating": {
       "value": 4.5,
@@ -424,6 +451,7 @@
     "name": "Розовый Фламинго",
     "shortName": "розовый фламинго",
     "profile": "Грейпфрут, малина, клубника и личи в готовой композиции.",
+    "hook": "Грейпфрут, малина, клубника и личи в готовой композиции.",
     "tags": [
       "грейпфрут",
       "малина",
@@ -447,6 +475,8 @@
     "maxShare": 60,
     "heatResistance": "средняя",
     "heatRank": 2,
+    "visualColor": "#D26A8A",
+    "iconKey": "tobacco:severny-pink-flamingo",
     "warnings": [],
     "rating": {
       "value": 4.3,
@@ -472,6 +502,7 @@
     "name": "Белый чай",
     "shortName": "белый чай",
     "profile": "Мягкий белый чай с фруктами и курагой.",
+    "hook": "Мягкий белый чай с фруктами и курагой.",
     "tags": [
       "белый чай",
       "курага",
@@ -495,6 +526,8 @@
     "maxShare": 60,
     "heatResistance": "средняя",
     "heatRank": 2,
+    "visualColor": "#A5A36C",
+    "iconKey": "tobacco:severny-white-tea",
     "warnings": [],
     "rating": {
       "value": 4.6,
@@ -520,6 +553,7 @@
     "name": "Чифир в сладость",
     "shortName": "сладкий чифир",
     "profile": "Насыщенный чёрный чай со сладким округлым телом.",
+    "hook": "Насыщенный чёрный чай со сладким округлым телом.",
     "tags": [
       "чёрный чай",
       "сладость",
@@ -542,6 +576,8 @@
     "maxShare": 60,
     "heatResistance": "средняя",
     "heatRank": 2,
+    "visualColor": "#796755",
+    "iconKey": "tobacco:severny-chifir",
     "warnings": [],
     "rating": {
       "value": 4.6,
@@ -567,6 +603,7 @@
     "name": "Малиновый Руби",
     "shortName": "малиновый руби",
     "profile": "Малина и лесная земляника с фруктовой нотой киви.",
+    "hook": "Малина и лесная земляника с фруктовой нотой киви.",
     "tags": [
       "малина",
       "земляника",
@@ -589,6 +626,8 @@
     "maxShare": 60,
     "heatResistance": "средняя",
     "heatRank": 2,
+    "visualColor": "#B94F68",
+    "iconKey": "tobacco:severny-raspberry-ruby",
     "warnings": [],
     "rating": {
       "value": 4.2,
@@ -614,6 +653,7 @@
     "name": "Wild Strawberry — Дикая земляника",
     "shortName": "дикая земляника",
     "profile": "Натуральная земляника на плотном Burley с сухим табачным телом.",
+    "hook": "Натуральная земляника на плотном Burley с сухим табачным телом.",
     "tags": [
       "земляника",
       "burley",
@@ -636,6 +676,8 @@
     "maxShare": 70,
     "heatResistance": "высокая",
     "heatRank": 3,
+    "visualColor": "#A74B56",
+    "iconKey": "tobacco:trofimoffs-wild-strawberry",
     "warnings": [],
     "rating": {
       "value": 4.5,
@@ -661,6 +703,7 @@
     "name": "Сакура",
     "shortName": "сакура",
     "profile": "Цветущая сакура с сухим сигарным фоном.",
+    "hook": "Цветущая сакура с сухим сигарным фоном.",
     "tags": [
       "сакура",
       "цветы",
@@ -682,6 +725,8 @@
     "maxShare": 50,
     "heatResistance": "высокая",
     "heatRank": 3,
+    "visualColor": "#C78391",
+    "iconKey": "tobacco:dogma-sakura",
     "warnings": [],
     "rating": {
       "value": 4.4,
@@ -707,6 +752,7 @@
     "name": "Клубяна",
     "shortName": "клубяна",
     "profile": "Плотная клубнично-земляничная ароматика на сигарном сырье.",
+    "hook": "Плотная клубнично-земляничная ароматика на сигарном сырье.",
     "tags": [
       "клубника",
       "земляника",
@@ -729,6 +775,8 @@
     "maxShare": 65,
     "heatResistance": "высокая",
     "heatRank": 3,
+    "visualColor": "#9F4054",
+    "iconKey": "tobacco:dogma-klubyana",
     "warnings": [],
     "rating": {
       "value": 4.4,
@@ -754,6 +802,7 @@
     "name": "Герлинад для него",
     "shortName": "герлинад",
     "profile": "Сухой парфюмерно-травяной профиль с древесным шлейфом.",
+    "hook": "Сухой парфюмерно-травяной профиль с древесным шлейфом.",
     "tags": [
       "парфюм",
       "травы",
@@ -777,6 +826,8 @@
     "maxShare": 35,
     "heatResistance": "высокая",
     "heatRank": 3,
+    "visualColor": "#776A66",
+    "iconKey": "tobacco:dogma-gerlinad",
     "warnings": [
       "Использовать как яркий акцент: профиль может быстро доминировать."
     ],
@@ -804,6 +855,7 @@
     "name": "Чёрная смородина",
     "shortName": "чёрная смородина",
     "profile": "Натуральная чёрная смородина с терпкой кожицей на сигарном сырье.",
+    "hook": "Натуральная чёрная смородина с терпкой кожицей на сигарном сырье.",
     "tags": [
       "чёрная смородина",
       "терпкость",
@@ -826,6 +878,8 @@
     "maxShare": 65,
     "heatResistance": "высокая",
     "heatRank": 3,
+    "visualColor": "#69506F",
+    "iconKey": "tobacco:dogma-black-currant",
     "warnings": [],
     "rating": {
       "value": 4.6,
@@ -851,6 +905,7 @@
     "name": "Ижевика",
     "shortName": "ижевика",
     "profile": "Тёмная ежевика с кисло-терпким краем на сигарном сырье.",
+    "hook": "Тёмная ежевика с кисло-терпким краем на сигарном сырье.",
     "tags": [
       "ежевика",
       "тёмная ягода",
@@ -874,6 +929,8 @@
     "maxShare": 65,
     "heatResistance": "высокая",
     "heatRank": 3,
+    "visualColor": "#55445F",
+    "iconKey": "tobacco:dogma-izhevika",
     "warnings": [],
     "rating": {
       "value": 4.6,
@@ -899,6 +956,7 @@
     "name": "Крымская лаванда",
     "shortName": "крымская лаванда",
     "profile": "Натуральная ферментированная лаванда с сухим цветочно-травяным шлейфом.",
+    "hook": "Натуральная ферментированная лаванда с сухим цветочно-травяным шлейфом.",
     "tags": [
       "лаванда",
       "цветы",
@@ -922,6 +980,8 @@
     "maxShare": 25,
     "heatResistance": "высокая",
     "heatRank": 3,
+    "visualColor": "#8A7194",
+    "iconKey": "tobacco:dogma-krymskaya-lavanda",
     "warnings": [
       "Цветочный аллерген: при чувствительности к лаванде рецепт не использовать.",
       "Доля выше 25% может перекрыть остальные ноты."
@@ -950,6 +1010,7 @@
     "name": "Evergreen — Фейхоа, можжевельник",
     "shortName": "вечнозелёный фейхоа",
     "profile": "Фейхоа и сухой можжевельник: фруктово-хвойная композиция.",
+    "hook": "Фейхоа и сухой можжевельник: фруктово-хвойная композиция.",
     "tags": [
       "фейхоа",
       "можжевельник",
@@ -974,6 +1035,8 @@
     "maxShare": 55,
     "heatResistance": "высокая",
     "heatRank": 3,
+    "visualColor": "#537C69",
+    "iconKey": "tobacco:banger-evergreen",
     "warnings": [],
     "rating": {
       "value": 4.5,
@@ -999,6 +1062,7 @@
     "name": "California Cola",
     "shortName": "калифорнийская кола",
     "profile": "Пряная сладкая кола с сухим табачным фоном.",
+    "hook": "Пряная сладкая кола с сухим табачным фоном.",
     "tags": [
       "кола",
       "специи",
@@ -1021,6 +1085,8 @@
     "maxShare": 65,
     "heatResistance": "высокая",
     "heatRank": 3,
+    "visualColor": "#875743",
+    "iconKey": "tobacco:satyr-california-cola",
     "warnings": [],
     "rating": {
       "value": 4.5,
@@ -1046,6 +1112,7 @@
     "name": "Brownie",
     "shortName": "брауни",
     "profile": "Тёмный шоколадный брауни с сухим сигарным телом.",
+    "hook": "Тёмный шоколадный брауни с сухим сигарным телом.",
     "tags": [
       "брауни",
       "шоколад",
@@ -1068,6 +1135,8 @@
     "maxShare": 65,
     "heatResistance": "высокая",
     "heatRank": 3,
+    "visualColor": "#70483D",
+    "iconKey": "tobacco:bonche-brownie",
     "warnings": [],
     "rating": {
       "value": 4.6,
@@ -1093,6 +1162,7 @@
     "name": "Cookie — Печенье",
     "shortName": "сухое печенье",
     "profile": "Сухое сливочное печенье на крепком сигарном сырье.",
+    "hook": "Сухое сливочное печенье на крепком сигарном сырье.",
     "tags": [
       "печенье",
       "сливочность",
@@ -1114,6 +1184,8 @@
     "maxShare": 65,
     "heatResistance": "высокая",
     "heatRank": 3,
+    "visualColor": "#B58C63",
+    "iconKey": "tobacco:bonche-cookie",
     "warnings": [],
     "rating": {
       "value": 4.2,
@@ -1139,6 +1211,7 @@
     "name": "Caramel — Карамель",
     "shortName": "сухая карамель",
     "profile": "Концентрированная сухая карамель для акцентной доли.",
+    "hook": "Концентрированная сухая карамель для акцентной доли.",
     "tags": [
       "карамель",
       "жжёный сахар",
@@ -1162,6 +1235,8 @@
     "maxShare": 20,
     "heatResistance": "высокая",
     "heatRank": 3,
+    "visualColor": "#B77842",
+    "iconKey": "tobacco:bonche-caramel",
     "warnings": [
       "Концентрированный модификатор: не превышать 20% в рецепте."
     ],
@@ -1189,6 +1264,7 @@
     "name": "Peanut — Арахис",
     "shortName": "жареный арахис",
     "profile": "Сухой жареный арахис на плотном листе Medium Seco.",
+    "hook": "Сухой жареный арахис на плотном листе Medium Seco.",
     "tags": [
       "арахис",
       "орех",
@@ -1211,6 +1287,8 @@
     "maxShare": 65,
     "heatResistance": "высокая",
     "heatRank": 3,
+    "visualColor": "#9B7547",
+    "iconKey": "tobacco:kraken-medium-seco-peanut",
     "warnings": [
       "Арахис — распространённый пищевой аллерген."
     ],

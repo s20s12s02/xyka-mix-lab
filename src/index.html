@@ -3,173 +3,117 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#702f4d" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#171412" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f4f1eb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#191816" media="(prefers-color-scheme: dark)">
   <meta name="color-scheme" content="light dark">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23702f4d'/%3E%3Cpath d='M18 17h28v7H36v23h-8V24H18z' fill='%23fbf6ea'/%3E%3C/svg%3E">
-  <title>Моя рецептурная — XYKA PRO</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%236d2446'/%3E%3Cpath d='M14 17h9l9 15 9-15h9v30h-8V30L32 45 22 30v17h-8z' fill='%23fffaf3'/%3E%3C/svg%3E">
+  <title>MixLab — миксы для XYKA PRO</title>
   <style>/*__STYLES__*/</style>
 </head>
 <body>
   <!--
-  THESIS: Рецептурный журнал превращает выбор микса в два ясных шага и отказывается от витрины одинаковых товарных карточек.
-  OWN-WORLD: Тёплая бумага, чернила, слива и чайный зелёный; индексные вкладки, журнальные линии и штампы происхождения.
-  STORY: Пользователь видит свою полку, выбирает вкусовое направление и словесную крепость, получает честно классифицированный рецепт и готовит 10 г в XYKA PRO.
-  FIRST VIEWPORT: Узкая плашка 18+, компактный заголовок, слева рейка шагов, справа восемь вкладок направления, ниже категории крепости и сливовая кнопка «Подобрать».
-  FORM: Двухступенчатый рецептурный реестр, первый из практичных вариантов и выбранный комп option-b-step-ledger.
-  FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+  THESIS: Спокойный лабораторный журнал ведёт от направления к крепости и показывает состав микса одной точной диаграммой.
+  OWN-WORLD: Тонкая гравюра, лабораторная типографика, бумажные поля и стабильный цвет каждого вкуса.
+  STORY: Сначала пользователь выбирает направление, затем крепость, после чего читает состав и открывает технологическую карту.
+  FIRST VIEWPORT: В шапке только 18+, MixLab и полка; ниже — шесть иллюстрированных направлений без преждевременной выдачи.
+  FORM: Последовательный двухшаговый выбор с постоянной строкой уже выбранного направления.
+  FINISH: Проверить автономность, точность диаграмм, клавиатуру, темы и три целевых ширины до передачи.
   -->
-  <div class="age-bar"><strong>18+</strong><span>Содержит никотин. Только для совершеннолетних.</span></div>
-
   <header class="masthead">
-    <button class="brand-button" type="button" data-view="finder" aria-label="Открыть подбор миксов">
-      <span class="brand-title">Моя рецептурная</span>
-      <span class="brand-subtitle">XYKA PRO</span>
+    <span class="age-mark" aria-label="Только для совершеннолетних">18+</span>
+    <button class="brand-button" type="button" data-view="finder" data-static-action="view" onclick="window.XykaStaticAction(event)" aria-label="Открыть подбор миксов">
+      <span class="brand-title">MixLab</span>
     </button>
-    <button class="pantry-status" type="button" data-view="pantry" aria-label="Открыть мою полку">
+    <button class="pantry-status" type="button" data-view="pantry" data-static-action="view" onclick="window.XykaStaticAction(event)" aria-label="Открыть мою полку">
       <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6.5h16M5.5 6.5v13h13v-13M8 10h3v3H8zm5 0h3v3h-3zM8 15h3v2H8zm5 0h3v2h-3z"/></svg>
-      <span>Моя полка</span>
-      <strong id="pantry-count">26 из 26</strong>
+      <span>Полка</span><strong id="pantry-count">26/26</strong>
     </button>
   </header>
-
   <div id="storage-notice" class="notice" role="status" hidden></div>
 
-  <main class="app-shell">
+  <main class="app-shell" data-app-shell>
     <section id="finder-view" class="view" data-view-panel="finder">
       <div class="finder-layout">
-        <section class="workbench" aria-labelledby="finder-title">
-          <div class="step-rail" aria-hidden="true">
-            <div class="step active"><span>1</span><strong>Вкус</strong></div>
-            <div class="step"><span>2</span><strong>Крепость</strong></div>
-          </div>
+        <section class="selection-panel" aria-labelledby="finder-title">
+          <header class="selection-heading">
+            <span class="section-kicker">Личная рецептурная</span>
+            <h1 id="finder-title">Найдём ваш микс</h1>
+            <p>Сначала выберите характер вкуса. Крепость появится следующим шагом.</p>
+          </header>
 
-          <div class="choice-sheet">
-            <h1 id="finder-title">Соберём чашу</h1>
-            <p class="lead">Выберите настроение вкуса и желаемое ощущение крепости.</p>
+          <section id="direction-step" class="selection-step" aria-labelledby="direction-title">
+            <div class="step-heading"><span class="step-number">1</span><div><span>Шаг первый</span><h2 id="direction-title">Направление</h2></div></div>
+            <div id="direction-options" class="direction-options"></div>
+          </section>
 
-            <fieldset class="choice-group direction-group">
-              <legend>Направление</legend>
-              <div id="direction-options" class="direction-options"></div>
-            </fieldset>
+          <section id="chosen-direction" class="chosen-direction" aria-live="polite" hidden>
+            <span class="step-number">1</span><img id="chosen-direction-icon" alt="">
+            <div><span>Направление</span><strong id="chosen-direction-label"></strong></div>
+            <button id="change-direction" class="text-button" type="button" data-static-action="change-direction" onclick="window.XykaStaticAction(event)">Изменить</button>
+          </section>
 
-            <fieldset class="choice-group strength-group">
-              <legend>Крепость</legend>
-              <div id="strength-options" class="strength-options"></div>
-            </fieldset>
-
-            <div class="action-row">
-              <button id="find-button" class="primary-action" type="button">
-                <span>Подобрать</span>
-                <small id="find-count">миксы готовы</small>
-              </button>
-              <button id="random-button" class="secondary-action" type="button">
-                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16 3h5v5M4 7h3c5 0 5 10 10 10h4M16 21h5v-5M4 17h3c1.8 0 2.9-1.3 4-3"/></svg>
-                <span>Случайный</span>
-              </button>
-            </div>
+          <section id="strength-step" class="selection-step strength-step" aria-labelledby="strength-title" hidden>
+            <div class="step-heading"><span class="step-number">2</span><div><span>Шаг второй</span><h2 id="strength-title">Крепость</h2></div></div>
+            <div id="strength-options" class="strength-options"></div>
 
             <details class="advanced-filters">
               <summary>Точная настройка</summary>
               <div class="filter-grid">
-                <label class="search-field">
-                  <span>Поиск по нотам и табакам</span>
-                  <input id="search-input" type="search" placeholder="Например, смородина" autocomplete="off">
+                <label class="search-field" for="search-input"><span>Поиск по миксам, нотам и табакам</span>
+                  <span class="search-control"><input id="search-input" type="search" placeholder="Например, сухая хвоя" autocomplete="off">
+                    <button id="clear-search" class="clear-search" type="button" data-static-action="clear-search" onclick="window.XykaStaticAction(event)" aria-label="Очистить поиск" hidden><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></svg></button>
+                  </span>
                 </label>
-                <label>
-                  <span>Компонентов</span>
-                  <select id="component-filter">
-                    <option value="любое">Любое количество</option>
-                    <option value="2">Два</option>
-                    <option value="3">Три</option>
-                    <option value="4">Четыре</option>
-                  </select>
-                </label>
-                <label>
-                  <span>Уверенность</span>
-                  <select id="confidence-filter">
-                    <option value="любая">Любая</option>
-                    <option value="высокая">Высокая</option>
-                    <option value="средняя">Средняя</option>
-                  </select>
-                </label>
+                <label for="component-filter"><span>Компонентов</span><select id="component-filter"><option value="любое">Не важно</option><option value="2">Два</option><option value="3">Три</option><option value="4">Четыре</option></select></label>
+                <label for="confidence-filter"><span>Уверенность</span><select id="confidence-filter"><option value="любая">Не важно</option><option value="высокая">Высокая</option><option value="средняя">Средняя</option></select></label>
               </div>
             </details>
-          </div>
+
+            <div class="action-row">
+              <button id="find-button" class="primary-action" type="button" data-static-action="find" onclick="window.XykaStaticAction(event)"><span>Подобрать</span><small id="find-count">миксы готовы</small></button>
+              <button id="random-button" class="secondary-action" type="button" data-static-action="random" onclick="window.XykaStaticAction(event)"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16 3h5v5M4 7h3c5 0 5 10 10 10h4M16 21h5v-5M4 17h3c1.8 0 2.9-1.3 4-3"/></svg><span>Случайный</span></button>
+            </div>
+          </section>
         </section>
 
-        <section class="results-panel" aria-labelledby="results-title">
-          <div class="results-heading">
-            <div>
-              <h2 id="results-title">Подходящие рецепты</h2>
-              <p id="results-summary" class="results-summary"></p>
-            </div>
-            <button id="clear-search" class="text-button" type="button" hidden>Сбросить поиск</button>
-          </div>
+        <section id="results-panel" class="results-panel" aria-labelledby="results-title" hidden>
+          <div class="results-heading"><div><span class="section-kicker">Подборка</span><h2 id="results-title">Миксы</h2><p id="results-summary" class="results-summary"></p></div></div>
           <div id="exact-results" class="recipe-list"></div>
-          <section id="nearest-section" class="nearest-section" hidden>
-            <h3>Ближайшие по крепости</h3>
-            <p>Точных вариантов меньше шести. Эти рецепты остаются в выбранном вкусовом направлении, но ощущаются иначе.</p>
-            <div id="nearest-results" class="recipe-list compact"></div>
-          </section>
+          <section id="nearest-section" class="nearest-section" hidden><h3>Ближайшие по крепости</h3><p>Эти варианты остаются в выбранном направлении, но ощущаются немного иначе.</p><div id="nearest-results" class="recipe-list compact"></div></section>
         </section>
       </div>
     </section>
 
     <section id="pantry-view" class="view utility-view" data-view-panel="pantry" hidden>
-      <header class="utility-heading">
-        <div><h1>Моя полка</h1><p>Выключите закончившийся вкус — он сразу исчезнет из всех рекомендаций.</p></div>
-        <button id="restore-pantry" class="secondary-action small" type="button">Вернуть все</button>
-      </header>
+      <header class="utility-heading"><div><span class="section-kicker">26 вкусов</span><h1>Моя полка</h1><p>Выключите закончившийся вкус — он исчезнет из рекомендаций.</p></div><button id="restore-pantry" class="secondary-action small" type="button" data-static-action="restore-pantry" onclick="window.XykaStaticAction(event)">Вернуть все</button></header>
       <div id="pantry-list" class="pantry-list"></div>
     </section>
-
     <section id="favorites-view" class="view utility-view" data-view-panel="favorites" hidden>
-      <header class="utility-heading"><div><h1>Избранное</h1><p>Рецепты, к которым хочется вернуться.</p></div></header>
-      <div id="favorite-results" class="recipe-list"></div>
+      <header class="utility-heading"><div><span class="section-kicker">Сохранено</span><h1>Избранное</h1><p>Миксы, к которым хочется вернуться.</p></div></header><div id="favorite-results" class="recipe-list"></div>
     </section>
-
     <section id="tried-view" class="view utility-view" data-view-panel="tried" hidden>
-      <header class="utility-heading"><div><h1>Пробовал</h1><p>Личный журнал уже приготовленных сочетаний.</p></div></header>
-      <div id="tried-results" class="recipe-list"></div>
+      <header class="utility-heading"><div><span class="section-kicker">Личный журнал</span><h1>Пробовал</h1><p>Уже приготовленные сочетания.</p></div></header><div id="tried-results" class="recipe-list"></div>
     </section>
   </main>
 
-  <nav class="bottom-nav" aria-label="Разделы приложения">
-    <button type="button" data-view="finder" class="active" aria-current="page">
-      <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg><span>Подбор</span>
-    </button>
-    <button type="button" data-view="pantry">
-      <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M6 6v14h12V6M9 10h6M9 14h6"/></svg><span>Полка</span>
-    </button>
-    <button type="button" data-view="favorites">
-      <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span>Избранное</span><small id="favorite-count">0</small>
-    </button>
-    <button type="button" data-view="tried">
-      <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Пробовал</span><small id="tried-count">0</small>
-    </button>
+  <nav class="bottom-nav" data-app-nav aria-label="Разделы приложения">
+    <button type="button" data-view="finder" data-static-action="view" onclick="window.XykaStaticAction(event)" class="active" aria-current="page"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg><span>Подбор</span></button>
+    <button type="button" data-view="pantry" data-static-action="view" onclick="window.XykaStaticAction(event)"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M6 6v14h12V6M9 10h6M9 14h6"/></svg><span>Полка</span></button>
+    <button type="button" data-view="favorites" data-static-action="view" onclick="window.XykaStaticAction(event)"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span>Избранное</span><small id="favorite-count">0</small></button>
+    <button type="button" data-view="tried" data-static-action="view" onclick="window.XykaStaticAction(event)"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg><span>Пробовал</span><small id="tried-count">0</small></button>
   </nav>
 
   <section id="recipe-drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" hidden>
-    <button class="drawer-backdrop" type="button" data-close-drawer aria-label="Закрыть рецепт"></button>
-    <article class="drawer-sheet">
-      <div class="drawer-handle" aria-hidden="true"></div>
-      <button class="drawer-close" type="button" data-close-drawer aria-label="Закрыть">
-        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></svg>
-      </button>
-      <div id="recipe-detail"></div>
-    </article>
+    <button class="drawer-backdrop" type="button" data-close-drawer data-static-action="close-drawer" onclick="window.XykaStaticAction(event)" aria-label="Закрыть рецепт"></button>
+    <article class="drawer-sheet"><div class="drawer-handle" aria-hidden="true"></div><button class="drawer-close" type="button" data-close-drawer data-static-action="close-drawer" onclick="window.XykaStaticAction(event)" aria-label="Закрыть"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></svg></button><div id="recipe-detail"></div></article>
   </section>
 
-  <footer class="site-footer">
-    <p><strong>18+</strong> Никотин вызывает зависимость. Восприятие крепости и вкуса индивидуально.</p>
-    <p>Забивка основана на <a href="https://xyka.pro/manual" target="_blank" rel="noopener noreferrer">официальной инструкции XYKA PRO</a>. Интернет нужен только для перехода к источникам.</p>
-  </footer>
-
+  <footer class="site-footer" data-app-footer><p><strong>18+</strong> Никотин вызывает зависимость. Восприятие крепости и вкуса индивидуально.</p></footer>
   <div id="live-region" class="visually-hidden" aria-live="polite"></div>
   <script type="application/json" id="inventory-data">/*__INVENTORY__*/</script>
   <script type="application/json" id="analogs-data">/*__ANALOGS__*/</script>
   <script type="application/json" id="recipes-data">/*__RECIPES__*/</script>
+  <script type="application/json" id="asset-data">/*__ASSETS__*/</script>
   <script>/*__CORE__*/</script>
   <script>/*__APP__*/</script>
 </body>

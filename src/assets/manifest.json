@@ -1,0 +1,335 @@
+[
+  {
+    "key": "tobacco:sebero-honey-melon",
+    "file": "generated/tobacco/sebero-honey-melon.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 91826,
+    "sha256": "ba497a0a57f79cebee77a600445fb96f674030001cb89759a92a830355bc0bfd",
+    "source": "tobacco-atlas-01.png"
+  },
+  {
+    "key": "tobacco:sebero-strawberry",
+    "file": "generated/tobacco/sebero-strawberry.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 91390,
+    "sha256": "01f101de17ef3b2df3cc4e462d05a3c7db3ef41e243e0644b177d2a13f05c95b",
+    "source": "tobacco-atlas-01.png"
+  },
+  {
+    "key": "tobacco:sebero-energetik",
+    "file": "generated/tobacco/sebero-energetik.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 84740,
+    "sha256": "0cbc010ad013c634fbc506ec88d39a8ae716748c4ecc673b00fa32864cc58abe",
+    "source": "tobacco-atlas-01.png"
+  },
+  {
+    "key": "tobacco:sebero-watermelon-melon-cola",
+    "file": "generated/tobacco/sebero-watermelon-melon-cola.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 88102,
+    "sha256": "fd71c1f237d7930034b276486838f963d93517dd0b399d29ff02e53aed271d2f",
+    "source": "tobacco-atlas-01.png"
+  },
+  {
+    "key": "tobacco:jent-lemon-pie",
+    "file": "generated/tobacco/jent-lemon-pie.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 69472,
+    "sha256": "98ca37f2f159b23372f666e2338da370d6a14caf074a5e16a05da8d67f2e79b0",
+    "source": "tobacco-atlas-01.png"
+  },
+  {
+    "key": "tobacco:jent-tropez",
+    "file": "generated/tobacco/jent-tropez.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 93626,
+    "sha256": "bda3c5e92c9ee6d41e1ce9923413123f96bf48083f614cd983ea655ee12022ed",
+    "source": "tobacco-atlas-01.png"
+  },
+  {
+    "key": "tobacco:sapphire-italian-tiramisu",
+    "file": "generated/tobacco/sapphire-italian-tiramisu.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 91938,
+    "sha256": "d1ce673e8edd0c524db595ce1f81d0d7894f809c65b65abfbdb7947265a5aa30",
+    "source": "tobacco-atlas-01.png"
+  },
+  {
+    "key": "tobacco:sapphire-redberry",
+    "file": "generated/tobacco/sapphire-redberry.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 86530,
+    "sha256": "fa552c4015c483e1bb52ae225aa122f78f0c6316f1f10f1ea65524a8bfa4b46c",
+    "source": "tobacco-atlas-01.png"
+  },
+  {
+    "key": "tobacco:xperience-multy-fruity",
+    "file": "generated/tobacco/xperience-multy-fruity.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 105918,
+    "sha256": "e4bfabbc9f834dbad70dad2d548169ac04fe9932d5e0a0f12e1b894f48851c0e",
+    "source": "tobacco-atlas-01.png"
+  },
+  {
+    "key": "tobacco:severny-pink-flamingo",
+    "file": "generated/tobacco/severny-pink-flamingo.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 103238,
+    "sha256": "84628e908f1fe834300372f5795d347a4c9ccb35e1fddf725770b412d363adc4",
+    "source": "tobacco-atlas-02.png"
+  },
+  {
+    "key": "tobacco:severny-white-tea",
+    "file": "generated/tobacco/severny-white-tea.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 81534,
+    "sha256": "75334f10df3580e06face0f4cab88aca0caa48f6f5fca6bea177a9b67d860996",
+    "source": "tobacco-atlas-02.png"
+  },
+  {
+    "key": "tobacco:severny-chifir",
+    "file": "generated/tobacco/severny-chifir.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 58324,
+    "sha256": "7ee28478c9cdfc829be47944c63edc8faa8da7ee20d7864d6f2fe1b5860611be",
+    "source": "tobacco-atlas-02.png"
+  },
+  {
+    "key": "tobacco:severny-raspberry-ruby",
+    "file": "generated/tobacco/severny-raspberry-ruby.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 94510,
+    "sha256": "ef2daa315a6d48ea0f796e7da03a69a3957620bcd1f4fca06c1719166f5ebe11",
+    "source": "tobacco-atlas-02.png"
+  },
+  {
+    "key": "tobacco:trofimoffs-wild-strawberry",
+    "file": "generated/tobacco/trofimoffs-wild-strawberry.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 68806,
+    "sha256": "9ce07b4f324880cdf43886d4d38f6f83e1bc8435957915cca43e34c2cdce2465",
+    "source": "tobacco-atlas-02.png"
+  },
+  {
+    "key": "tobacco:dogma-sakura",
+    "file": "generated/tobacco/dogma-sakura.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 66734,
+    "sha256": "47499401156ddd9e21c2b27d193fa78c0cd7f6bfc3797b5ebdfec78eec89175f",
+    "source": "tobacco-atlas-02.png"
+  },
+  {
+    "key": "tobacco:dogma-klubyana",
+    "file": "generated/tobacco/dogma-klubyana.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 96772,
+    "sha256": "6b157510d62020338b8127d62c064908bbd25cbd7ed9e9ceab1ff98e62b32d16",
+    "source": "tobacco-atlas-02.png"
+  },
+  {
+    "key": "tobacco:dogma-gerlinad",
+    "file": "generated/tobacco/dogma-gerlinad.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 78598,
+    "sha256": "b8dbadeab980fab105262e2f5d438595346d108f5dc429390bdd0cad5c03652e",
+    "source": "tobacco-atlas-02.png"
+  },
+  {
+    "key": "tobacco:dogma-black-currant",
+    "file": "generated/tobacco/dogma-black-currant.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 87906,
+    "sha256": "0f9bbb2376cea0ff8141d622a741bc7d05a676eea19a0c5df42064fa8e3fc027",
+    "source": "tobacco-atlas-02.png"
+  },
+  {
+    "key": "tobacco:dogma-izhevika",
+    "file": "generated/tobacco/dogma-izhevika.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 84944,
+    "sha256": "b8b8bbbbad97471a38fb8067aa63dd113c303bda4b889371cb8d9ad39af4643e",
+    "source": "tobacco-atlas-03.png"
+  },
+  {
+    "key": "tobacco:dogma-krymskaya-lavanda",
+    "file": "generated/tobacco/dogma-krymskaya-lavanda.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 70762,
+    "sha256": "da8b639a1e3843d679c5c13a45069aff4a1b62e71b3fd75bf18549ba534434ea",
+    "source": "tobacco-atlas-03.png"
+  },
+  {
+    "key": "tobacco:banger-evergreen",
+    "file": "generated/tobacco/banger-evergreen.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 97330,
+    "sha256": "bf50d1dbba53988de5c0ba7459178efde1b65f63254b4ffe960834f73df810fd",
+    "source": "tobacco-atlas-03.png"
+  },
+  {
+    "key": "tobacco:satyr-california-cola",
+    "file": "generated/tobacco/satyr-california-cola.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 81456,
+    "sha256": "5caa091878b9ac196f7992675c1f17e8a1a6e94533631f82b701af27b7c6a1c5",
+    "source": "tobacco-atlas-03.png"
+  },
+  {
+    "key": "tobacco:bonche-brownie",
+    "file": "generated/tobacco/bonche-brownie.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 77530,
+    "sha256": "86fa656a6f24cb57b5c9e8e04a1ac9f9b858f5f2c1ef654372b459b9b86d962c",
+    "source": "tobacco-atlas-03.png"
+  },
+  {
+    "key": "tobacco:bonche-cookie",
+    "file": "generated/tobacco/bonche-cookie.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 100168,
+    "sha256": "c311dd6723ced06c9f730ddc013d23b7cacabf9b027fa8808608ebb4ae819880",
+    "source": "tobacco-atlas-03.png"
+  },
+  {
+    "key": "tobacco:bonche-caramel",
+    "file": "generated/tobacco/bonche-caramel.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 81144,
+    "sha256": "927d45bdb23861413f249eef5d3e6206e1b121c6f58b34bbe5092136797db125",
+    "source": "tobacco-atlas-03.png"
+  },
+  {
+    "key": "tobacco:kraken-medium-seco-peanut",
+    "file": "generated/tobacco/kraken-medium-seco-peanut.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 101808,
+    "sha256": "9b42f67f2a333efcb07d56ba38b4dc06eaaf7a6e2cec47e79947f231b19c34d9",
+    "source": "tobacco-atlas-03.png"
+  },
+  {
+    "key": "direction:dessert",
+    "file": "generated/direction/dessert.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 69472,
+    "sha256": "98ca37f2f159b23372f666e2338da370d6a14caf074a5e16a05da8d67f2e79b0",
+    "source": "derived:jent-lemon-pie"
+  },
+  {
+    "key": "direction:fruit",
+    "file": "generated/direction/fruit.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 105918,
+    "sha256": "e4bfabbc9f834dbad70dad2d548169ac04fe9932d5e0a0f12e1b894f48851c0e",
+    "source": "derived:xperience-multy-fruity"
+  },
+  {
+    "key": "direction:berry",
+    "file": "generated/direction/berry.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 103238,
+    "sha256": "84628e908f1fe834300372f5795d347a4c9ccb35e1fddf725770b412d363adc4",
+    "source": "derived:severny-pink-flamingo"
+  },
+  {
+    "key": "direction:citrus",
+    "file": "generated/direction/citrus.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 93626,
+    "sha256": "bda3c5e92c9ee6d41e1ce9923413123f96bf48083f614cd983ea655ee12022ed",
+    "source": "derived:jent-tropez"
+  },
+  {
+    "key": "direction:drink",
+    "file": "generated/direction/drink.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 81456,
+    "sha256": "5caa091878b9ac196f7992675c1f17e8a1a6e94533631f82b701af27b7c6a1c5",
+    "source": "derived:satyr-california-cola"
+  },
+  {
+    "key": "direction:unusual",
+    "file": "generated/direction/unusual.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 97330,
+    "sha256": "bf50d1dbba53988de5c0ba7459178efde1b65f63254b4ffe960834f73df810fd",
+    "source": "derived:banger-evergreen"
+  },
+  {
+    "key": "strength:any",
+    "file": "generated/strength/any.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 44246,
+    "sha256": "56b1257dd4daef988ace424c1e687ce95c26c73d00bb0af12a8306d43e8e8bc9",
+    "source": "strength-atlas.png"
+  },
+  {
+    "key": "strength:light",
+    "file": "generated/strength/light.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 30428,
+    "sha256": "22e0fba5245a8da31cd7b9834c16c2ccc8ada38a7b8098807d27d1f0229cf2b4",
+    "source": "strength-atlas.png"
+  },
+  {
+    "key": "strength:medium-light",
+    "file": "generated/strength/medium-light.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 47182,
+    "sha256": "f96501244704f3e82023cfca930cf74ddcea5e759d36f21bd2589a924da44a30",
+    "source": "strength-atlas.png"
+  },
+  {
+    "key": "strength:medium",
+    "file": "generated/strength/medium.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 54000,
+    "sha256": "b7b150e049dc557de19fe47b8416cb843a36e95adafd0e3b7cdae1571e882193",
+    "source": "strength-atlas.png"
+  },
+  {
+    "key": "strength:strong",
+    "file": "generated/strength/strong.webp",
+    "width": 256,
+    "height": 256,
+    "bytes": 58480,
+    "sha256": "0a9678940fe14b667ec6de56ccfe8bf12fd359acd0b1db52c69560dbc147bbe0",
+    "source": "strength-atlas.png"
+  }
+]

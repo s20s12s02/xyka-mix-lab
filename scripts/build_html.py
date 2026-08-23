@@ -17,6 +17,7 @@ CORE_EXPORTS = [
     "selectRandomRecipe",
     "searchRecipes",
     "availableStrengths",
+    "compositionSegments",
     "STRENGTH_ORDER",
 ]
 VERSIONED_FILENAME = "xyka_mix_lab_2026-08-22.html"
@@ -24,6 +25,16 @@ VERSIONED_FILENAME = "xyka_mix_lab_2026-08-22.html"
 
 def _json_for_script(path: Path) -> str:
     payload = json.loads(path.read_text(encoding="utf-8"))
+    return json.dumps(payload, ensure_ascii=False, separators=(",", ":")).replace("</script", "<\\/script")
+
+
+def _asset_data(project_root: Path) -> str:
+    asset_root = project_root / "src" / "assets"
+    manifest = json.loads((asset_root / "manifest.json").read_text(encoding="utf-8"))
+    payload = {}
+    for item in manifest:
+        encoded = base64.b64encode((asset_root / item["file"]).read_bytes()).decode("ascii")
+        payload[item["key"]] = f"data:image/webp;base64,{encoded}"
     return json.dumps(payload, ensure_ascii=False, separators=(",", ":")).replace("</script", "<\\/script")
 
 
@@ -51,6 +62,7 @@ def build_html(project_root: Path, output_path: Path) -> None:
         "/*__INVENTORY__*/": _json_for_script(project_root / "data" / "inventory.json"),
         "/*__ANALOGS__*/": _json_for_script(project_root / "data" / "analogs.json"),
         "/*__RECIPES__*/": _json_for_script(project_root / "data" / "recipes.json"),
+        "/*__ASSETS__*/": _asset_data(project_root),
         "/*__CORE__*/": _browser_core((project_root / "src" / "core.mjs").read_text(encoding="utf-8")),
         "/*__APP__*/": (project_root / "src" / "app.js").read_text(encoding="utf-8"),
     }

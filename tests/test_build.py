@@ -1,4 +1,6 @@
 import json
+import base64
+import hashlib
 import re
 import tempfile
 import unittest
@@ -50,6 +52,28 @@ class AutonomousBuildTests(unittest.TestCase):
         self.assertNotIn("fetch(", html)
         self.assertNotIn("XMLHttpRequest", html)
         self.assertNotIn("serviceWorker", html)
+        manifest_path = ROOT / "src" / "assets" / "manifest.json"
+        self.assertTrue(manifest_path.exists(), "asset manifest is missing")
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        self.assertEqual(len(manifest), 37)
+        self.assertEqual(sum(item["key"].startswith("tobacco:") for item in manifest), 26)
+        self.assertEqual(sum(item["key"].startswith("direction:") for item in manifest), 6)
+        self.assertEqual(sum(item["key"].startswith("strength:") for item in manifest), 5)
+        for asset in manifest:
+            path = ROOT / "src" / "assets" / asset["file"]
+            payload = path.read_bytes()
+            self.assertEqual(path.suffix, ".webp")
+            self.assertEqual(hashlib.sha256(payload).hexdigest(), asset["sha256"])
+            self.assertEqual(len(payload), asset["bytes"])
+            self.assertGreater(asset["width"], 0)
+            self.assertGreater(asset["height"], 0)
+        assets_match = re.search(r'<script type="application/json" id="asset-data">(.*?)</script>', html, re.S)
+        self.assertIsNotNone(assets_match)
+        embedded_assets = json.loads(assets_match.group(1))
+        self.assertEqual(set(embedded_assets), {item["key"] for item in manifest})
+        for value in embedded_assets.values():
+            self.assertTrue(value.startswith("data:image/webp;base64,"))
+            self.assertTrue(base64.b64decode(value.split(",", 1)[1]))
         for data_id, filename, expected_count in (
             ("inventory-data", "inventory.json", 26),
             ("analogs-data", "analogs.json", 15),
@@ -85,6 +109,41 @@ class AutonomousBuildTests(unittest.TestCase):
         self.assertNotIn(">×</button>", html)
         self.assertRegex(html, r'class="drawer-close"[^>]*>\s*<svg')
         self.assertRegex(html, r"\.primary-action\s*\{[^}]*clip-path:")
+        self.assertRegex(html, r"@media\s*\(prefers-color-scheme:\s*dark\)[\s\S]*?\.strength-option img\s*\{[^}]*background:\s*#fffaf3;")
+
+    def test_hidden_drawer_cannot_be_overridden_by_component_display(self):
+        temp, _, html = self.build()
+        self.addCleanup(temp.cleanup)
+        self.assertRegex(html, r"\[hidden\]\[hidden\]\s*\{\s*display:\s*none;")
+
+    def test_mobile_primary_action_keeps_mix_count_words_intact(self):
+        temp, _, html = self.build()
+        self.addCleanup(temp.cleanup)
+        self.assertRegex(html, r"\.primary-action small\s*\{[^}]*overflow-wrap:\s*normal;")
+        self.assertRegex(html, r"@media\s*\(max-width:\s*380px\)[\s\S]*?\.action-row\s*\{\s*grid-template-columns:\s*1fr;")
+
+    def test_mixlab_copy_and_hidden_quality_metadata(self):
+        temp, _, html = self.build()
+        self.addCleanup(temp.cleanup)
+        parser = VisibleTextParser()
+        parser.feed(html)
+        visible = " ".join(parser.parts)
+        self.assertTrue("MixLab — миксы для XYKA PRO" in html, "MixLab title is missing")
+        self.assertNotIn("Моя рецептурная", visible)
+        self.assertNotIn("Происхождение", visible)
+        self.assertNotIn("Источники", visible)
+        self.assertNotIn("Ограничения и аллергены", visible)
+        self.assertNotIn("официальной инструкции XYKA PRO", visible)
+        self.assertNotIn("Интернет нужен", visible)
+        self.assertIn("Никотин вызывает зависимость", visible)
+
+    def test_composition_ring_contract_is_embedded(self):
+        temp, _, html = self.build()
+        self.addCleanup(temp.cleanup)
+        self.assertTrue("composition-ring" in html, "composition ring class is missing")
+        self.assertTrue("rotate(-90" in html, "composition ring must start at 12 o'clock")
+        self.assertTrue("stroke-dasharray" in html, "composition ring segments are missing")
+        self.assertTrue("visualColor" in html, "stable ingredient colors are missing")
 
     def test_pages_build_keeps_root_index_identical_to_versioned_artifact(self):
         publisher = getattr(build_module, "build_pages", None)
@@ -95,7 +154,7 @@ class AutonomousBuildTests(unittest.TestCase):
             self.assertEqual(versioned.name, "xyka_mix_lab_2026-08-22.html")
             self.assertEqual(entrypoint.name, "index.html")
             self.assertEqual(versioned.read_bytes(), entrypoint.read_bytes())
-            self.assertIn("Моя рецептурная — XYKA PRO", entrypoint.read_text(encoding="utf-8"))
+            self.assertIn("MixLab — миксы для XYKA PRO", entrypoint.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":
