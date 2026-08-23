@@ -15,14 +15,12 @@ export function filterRecipes(recipes, options = {}) {
     strength = "любая",
     availableIds = new Set(),
     componentCount = "любое",
-    confidence = "любая",
   } = options;
   return recipes.filter((recipe) => {
     if (!recipeIsAvailable(recipe, availableIds)) return false;
     if (direction !== "любое" && !recipe.directions.includes(direction)) return false;
     if (strength !== "любая" && recipe.strengthLabel !== strength) return false;
     if (componentCount !== "любое" && recipe.components.length !== Number(componentCount)) return false;
-    if (confidence !== "любая" && recipe.confidence !== confidence) return false;
     return true;
   });
 }
@@ -57,9 +55,17 @@ export function normalizeState(rawState, catalogs) {
     direction: catalogs.directions.has(migratedDirection) ? migratedDirection : null,
     strength: raw.strength === "любая" || catalogs.strengths.has(raw.strength) ? (raw.strength || "любая") : "любая",
     componentCount: [2, 3, 4].includes(Number(raw.componentCount)) ? Number(raw.componentCount) : "любое",
-    confidence: ["высокая", "средняя"].includes(raw.confidence) ? raw.confidence : "любая",
     view: ["finder", "pantry", "favorites", "tried"].includes(raw.view) ? raw.view : "finder",
     query: typeof raw.query === "string" ? raw.query.slice(0, 80) : "",
+  };
+}
+
+export function migrateLegacyPantryState(rawState, catalogs) {
+  const fresh = normalizeState(null, catalogs);
+  if (!rawState || typeof rawState !== "object" || !Array.isArray(rawState.availableIds)) return fresh;
+  return {
+    ...fresh,
+    availableIds: filteredIds(rawState.availableIds, catalogs.inventoryIds),
   };
 }
 
@@ -93,7 +99,6 @@ export function searchRecipes(recipes, query, inventoryById = new Map()) {
     });
     const haystack = [
       recipe.name,
-      recipe.hook,
       recipe.directionLabel,
       recipe.strengthLabel,
       recipe.whyItWorks,
@@ -130,6 +135,48 @@ export function compositionSegments(components, inventoryById) {
       cumulative += component.percent;
       return segment;
     });
+}
+
+export function sectorGeometry(components) {
+  const pointOnCircle = (radius, angle) => {
+    const radians = angle * Math.PI / 180;
+    return {
+      x: 150 + radius * Math.cos(radians),
+      y: 150 + radius * Math.sin(radians),
+    };
+  };
+  let angle = -90;
+  return components.map((component) => {
+    const startAngle = angle;
+    const endAngle = startAngle + component.percent * 3.6;
+    const middleAngle = startAngle + (endAngle - startAngle) / 2;
+    angle = endAngle;
+    return {
+      tobaccoId: component.tobaccoId,
+      percent: component.percent,
+      startAngle,
+      endAngle,
+      middleAngle,
+      labelPoint: pointOnCircle(54, middleAngle),
+      iconPoint: pointOnCircle(127, middleAngle),
+      leaderStart: pointOnCircle(95, middleAngle),
+      leaderEnd: pointOnCircle(108, middleAngle),
+    };
+  });
+}
+
+export function layerGeometry(recipe) {
+  const layers = recipe?.packing?.layout?.type === "layers" ? recipe.packing.layout.layers : [];
+  return layers.map((layer) => ({
+    order: layer.order,
+    position: layer.position,
+    percent: layer.percent,
+    heightPercent: layer.percent,
+    segments: layer.segments.map((segment) => ({
+      ...segment,
+      widthPercent: layer.percent ? segment.percent / layer.percent * 100 : 0,
+    })),
+  }));
 }
 
 export { STRENGTH_ORDER };

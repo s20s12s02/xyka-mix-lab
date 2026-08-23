@@ -65,12 +65,10 @@
                   </span>
                 </label>
                 <label for="component-filter"><span>Компонентов</span><select id="component-filter"><option value="любое">Не важно</option><option value="2">Два</option><option value="3">Три</option><option value="4">Четыре</option></select></label>
-                <label for="confidence-filter"><span>Уверенность</span><select id="confidence-filter"><option value="любая">Не важно</option><option value="высокая">Высокая</option><option value="средняя">Средняя</option></select></label>
               </div>
             </details>
 
             <div class="action-row">
-              <button id="find-button" class="primary-action" type="button" data-static-action="find" onclick="window.XykaStaticAction(event)"><span>Подобрать</span><small id="find-count">миксы готовы</small></button>
               <button id="random-button" class="secondary-action" type="button" data-static-action="random" onclick="window.XykaStaticAction(event)"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16 3h5v5M4 7h3c5 0 5 10 10 10h4M16 21h5v-5M4 17h3c1.8 0 2.9-1.3 4-3"/></svg><span>Случайный</span></button>
             </div>
           </section>
@@ -79,7 +77,6 @@
         <section id="results-panel" class="results-panel" aria-labelledby="results-title" hidden>
           <div class="results-heading"><div><span class="section-kicker">Подборка</span><h2 id="results-title">Миксы</h2><p id="results-summary" class="results-summary"></p></div></div>
           <div id="exact-results" class="recipe-list"></div>
-          <section id="nearest-section" class="nearest-section" hidden><h3>Ближайшие по крепости</h3><p>Эти варианты остаются в выбранном направлении, но ощущаются немного иначе.</p><div id="nearest-results" class="recipe-list compact"></div></section>
         </section>
       </div>
     </section>

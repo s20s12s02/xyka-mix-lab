@@ -14,10 +14,13 @@ CORE_EXPORTS = [
     "filterRecipes",
     "findNearestByStrength",
     "normalizeState",
+    "migrateLegacyPantryState",
     "selectRandomRecipe",
     "searchRecipes",
     "availableStrengths",
     "compositionSegments",
+    "sectorGeometry",
+    "layerGeometry",
     "STRENGTH_ORDER",
 ]
 VERSIONED_FILENAME = "xyka_mix_lab_2026-08-22.html"

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-22T23:53:40+03:00",
+  "generatedAt": "2026-08-23T12:55:00+03:00",
   "title": "Design System: Моя рецептурная — XYKA PRO",
   "extensions": {
     "colorMeta": {
@@ -32,12 +32,12 @@
   },
   "components": [
     {
-      "name": "Primary Recipe Action",
+      "name": "Random Recipe Action",
       "kind": "button",
-      "refersTo": "button-primary",
-      "description": "Вырубленная сливовая плашка для запуска подбора.",
-      "html": "<button class=\"ds-primary\"><span>ПОДОБРАТЬ</span><small>8 рецептов</small></button>",
-      "css": ".ds-primary{min-height:54px;padding:8px 18px;display:grid;place-items:center;border:1px solid #702f4d;color:#fbf6ea;background:#702f4d;clip-path:polygon(0 8px,8px 8px,8px 0,calc(100% - 8px) 0,calc(100% - 8px) 8px,100% 8px,100% calc(100% - 8px),calc(100% - 8px) calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,8px calc(100% - 8px),0 calc(100% - 8px));font:700 1.28rem/1.05 'Arial Narrow',sans-serif;letter-spacing:.025em}.ds-primary small{font:600 .62rem/1.2 system-ui}.ds-primary:hover{background:#59233d}.ds-primary:focus-visible{outline:0;box-shadow:inset 0 0 0 3px #b48a52}"
+      "refersTo": "button-secondary",
+      "description": "Спокойная контурная кнопка для открытия случайного рецепта из уже рассчитанной выдачи.",
+      "html": "<button class=\"ds-random\">СЛУЧАЙНЫЙ</button>",
+      "css": ".ds-random{min-height:44px;padding:9px 16px;border:1px solid #702f4d;border-radius:9px;color:#702f4d;background:transparent;font:700 .82rem/1.1 system-ui;letter-spacing:.04em}.ds-random:hover{background:#faeef3}.ds-random:focus-visible{outline:3px solid #b48a52;outline-offset:3px}"
     },
     {
       "name": "Direction Tab",
@@ -54,24 +54,17 @@
       "css": ".ds-strength{min-height:44px;padding:8px 12px;border:1px solid #536b58;color:#fbf6ea;background:#536b58;font:500 .95rem/1.1 'Arial Narrow',sans-serif}.ds-strength:focus-visible{outline:3px solid #b48a52;outline-offset:3px}"
     },
     {
-      "name": "Origin Stamp",
-      "kind": "chip",
-      "description": "Честная метка происхождения рецепта.",
-      "html": "<span class=\"ds-stamp\">АДАПТИРОВАННЫЙ</span>",
-      "css": ".ds-stamp{display:inline-flex;min-height:26px;padding:4px 7px;align-items:center;border:1px solid #702f4d;color:#702f4d;background:transparent;font:700 .68rem/1 system-ui;letter-spacing:.04em;transform:rotate(-1.5deg)}"
-    },
-    {
       "name": "Recipe Card",
       "kind": "card",
       "refersTo": "recipe-card",
-      "description": "Самостоятельный лист с названием, пропорциями и действиями.",
-      "html": "<article class=\"ds-card\"><span class=\"ds-card-label\">АВТОРСКИЙ</span><h3>Красная строка</h3><p>смородина · ежевика · клубника</p></article>",
-      "css": ".ds-card{padding:18px 16px 15px;border:1px solid rgba(37,34,31,.48);border-radius:14px;color:#25221f;background:#fbf6ea;box-shadow:0 15px 38px rgba(69,48,35,.12),0 3px 8px rgba(69,48,35,.08);font-family:system-ui}.ds-card h3{margin:12px 0 4px;font:700 1.52rem/1.05 'Arial Narrow',sans-serif}.ds-card p{margin:0;color:#675f57}.ds-card-label{color:#702f4d;font-size:.68rem;font-weight:700;letter-spacing:.04em}"
+      "description": "Самостоятельный лист с говорящим названием, официальным составом, пропорциями и действиями; без рецептного hook.",
+      "html": "<article class=\"ds-card\"><h3>Клубнично-малиновый энергетик</h3><p>Sebero — Strawberry — Клубника · 45%</p><p>Sebero — Energetik — Энергетик · 35%</p></article>",
+      "css": ".ds-card{padding:18px 16px 15px;border:1px solid rgba(37,34,31,.48);border-radius:14px;color:#25221f;background:#fbf6ea;box-shadow:0 15px 38px rgba(69,48,35,.12),0 3px 8px rgba(69,48,35,.08);font-family:system-ui}.ds-card h3{margin:0 0 12px;font:700 1.52rem/1.05 'Arial Narrow',sans-serif}.ds-card p{margin:5px 0;color:#675f57}"
     },
     {
       "name": "Search Field",
       "kind": "input",
-      "description": "Прямоугольное поле поиска по нотам и табакам.",
+      "description": "Прямоугольное поле поиска по говорящим названиям, вкусовым описаниям и табакам.",
       "html": "<input class=\"ds-input\" type=\"search\" placeholder=\"Например, смородина\">",
       "css": ".ds-input{width:100%;min-height:46px;padding:9px 11px;border:1px solid rgba(37,34,31,.48);border-radius:0;color:#25221f;background:#fbf6ea;font:400 1rem/1.48 system-ui}.ds-input::placeholder{color:#675f57}.ds-input:focus-visible{outline:3px solid #b48a52;outline-offset:3px}"
     },
@@ -92,7 +85,7 @@
       {"name": "Editorial Contrast Rule", "body": "Display отвечает за ориентиры и названия; не использовать его для длинных абзацев.", "section": "typography"},
       {"name": "Paper Stack Rule", "body": "Тень означает отдельный лист; секции одного листа разделяются линиями.", "section": "elevation"}
     ],
-    "dos": ["Do связывать декоративную линию с реальной журнальной структурой или измерением.", "Do показывать состояние цветом, подписью и нативной семантикой одновременно.", "Do сохранять выбор и два главных действия в первом мобильном экране.", "Do использовать встроенный SVG для всех служебных иконок."],
+    "dos": ["Do связывать декоративную линию с реальной журнальной структурой или измерением.", "Do показывать состояние цветом, подписью и нативной семантикой одновременно.", "Do пересчитывать выдачу сразу после выбора направления или крепости без submit-кнопки.", "Do использовать встроенный SVG для всех служебных иконок."],
     "donts": ["Don't превращать интерфейс в магазинную сетку или клубный чёрно-золотой лаунж.", "Don't использовать градиентный текст, стекло, неон или жёсткие декоративные тени.", "Don't добавлять случайную бумажную текстуру без пользы для читаемости и автономности.", "Don't кодировать крепость числом в пользовательском интерфейсе."]
   }
 }

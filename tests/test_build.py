@@ -74,10 +74,11 @@ class AutonomousBuildTests(unittest.TestCase):
         for value in embedded_assets.values():
             self.assertTrue(value.startswith("data:image/webp;base64,"))
             self.assertTrue(base64.b64decode(value.split(",", 1)[1]))
+        recipe_count = len(json.loads((ROOT / "data" / "recipes.json").read_text(encoding="utf-8")))
         for data_id, filename, expected_count in (
             ("inventory-data", "inventory.json", 26),
             ("analogs-data", "analogs.json", 15),
-            ("recipes-data", "recipes.json", 216),
+            ("recipes-data", "recipes.json", recipe_count),
         ):
             match = re.search(rf'<script type="application/json" id="{data_id}">(.*?)</script>', html, re.S)
             self.assertIsNotNone(match, data_id)
@@ -89,7 +90,8 @@ class AutonomousBuildTests(unittest.TestCase):
         self.addCleanup(temp.cleanup)
         for block in ("THESIS:", "OWN-WORLD:", "STORY:", "FIRST VIEWPORT:", "FORM:", "FINISH:"):
             self.assertIn(block, html)
-        self.assertIn("xyka-mix-lab:v1", html)
+        self.assertIn("xyka-mix-lab:v2", html)
+        self.assertIn("xyka-mix-lab:v1", html, "v1 key is retained only for pantry migration")
         self.assertIn("safe-area-inset-bottom", html)
         self.assertIn("prefers-reduced-motion", html)
 
@@ -103,12 +105,14 @@ class AutonomousBuildTests(unittest.TestCase):
         self.assertNotRegex(visible, r"крепост\w*\s+[1-9](?:[,.][05])?")
         self.assertNotIn("ползунок крепости", visible.lower())
 
-    def test_signature_action_and_icon_system_match_the_approved_surface(self):
+    def test_random_action_and_icon_system_match_the_approved_surface(self):
         temp, _, html = self.build()
         self.addCleanup(temp.cleanup)
         self.assertNotIn(">×</button>", html)
         self.assertRegex(html, r'class="drawer-close"[^>]*>\s*<svg')
-        self.assertRegex(html, r"\.primary-action\s*\{[^}]*clip-path:")
+        self.assertNotIn('id="find-button"', html)
+        self.assertNotIn(">Подобрать<", html)
+        self.assertIn('id="random-button"', html)
         self.assertRegex(html, r"@media\s*\(prefers-color-scheme:\s*dark\)[\s\S]*?\.strength-option img\s*\{[^}]*background:\s*#fffaf3;")
 
     def test_hidden_drawer_cannot_be_overridden_by_component_display(self):
@@ -116,10 +120,9 @@ class AutonomousBuildTests(unittest.TestCase):
         self.addCleanup(temp.cleanup)
         self.assertRegex(html, r"\[hidden\]\[hidden\]\s*\{\s*display:\s*none;")
 
-    def test_mobile_primary_action_keeps_mix_count_words_intact(self):
+    def test_mobile_action_row_collapses_without_submit_button(self):
         temp, _, html = self.build()
         self.addCleanup(temp.cleanup)
-        self.assertRegex(html, r"\.primary-action small\s*\{[^}]*overflow-wrap:\s*normal;")
         self.assertRegex(html, r"@media\s*\(max-width:\s*380px\)[\s\S]*?\.action-row\s*\{\s*grid-template-columns:\s*1fr;")
 
     def test_mixlab_copy_and_hidden_quality_metadata(self):
@@ -135,6 +138,11 @@ class AutonomousBuildTests(unittest.TestCase):
         self.assertNotIn("Ограничения и аллергены", visible)
         self.assertNotIn("официальной инструкции XYKA PRO", visible)
         self.assertNotIn("Интернет нужен", visible)
+        self.assertNotIn("Уверенность", visible)
+        self.assertNotIn('id="confidence-filter"', html)
+        self.assertNotIn('class="recipe-hook"', html)
+        self.assertNotIn('class="detail-hook"', html)
+        self.assertNotIn("<h3>Ноты</h3>", html)
         self.assertIn("Никотин вызывает зависимость", visible)
 
     def test_composition_ring_contract_is_embedded(self):
@@ -144,6 +152,26 @@ class AutonomousBuildTests(unittest.TestCase):
         self.assertTrue("rotate(-90" in html, "composition ring must start at 12 o'clock")
         self.assertTrue("stroke-dasharray" in html, "composition ring segments are missing")
         self.assertTrue("visualColor" in html, "stable ingredient colors are missing")
+
+    def test_packing_diagrams_and_official_component_copy_are_embedded(self):
+        temp, _, html = self.build()
+        self.addCleanup(temp.cleanup)
+        self.assertIn("packing-sector-diagram", html)
+        self.assertIn("packing-layer-diagram", html)
+        self.assertIn("sectorGeometry", html)
+        self.assertIn("layerGeometry", html)
+        self.assertIn("packing-sector-icon", html)
+        self.assertIn("packing-sector-leader", html)
+        self.assertIn(
+            "Слой у нагревателя закладывайте в капсулу первым: он ложится на дно, а после переворота капсулы и установки в XYKA PRO окажется сверху, ближе к нагревателю.",
+            html,
+        )
+        self.assertRegex(html, r"window\.XykaCore\s*=\s*\{[^}]*sectorGeometry")
+        self.assertRegex(html, r"window\.XykaCore\s*=\s*\{[^}]*layerGeometry")
+        self.assertRegex(html, r"window\.XykaCore\s*=\s*\{[^}]*migrateLegacyPantryState")
+        self.assertRegex(html, r"item\.brand[\s\S]{0,160}item\.name")
+        for forbidden in ("Отвесьте 10 г", "самый яркий акцент", "остаётся отделённым"):
+            self.assertNotIn(forbidden, html)
 
     def test_pages_build_keeps_root_index_identical_to_versioned_artifact(self):
         publisher = getattr(build_module, "build_pages", None)

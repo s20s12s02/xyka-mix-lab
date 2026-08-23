@@ -1,7 +1,8 @@
 (() => {
   "use strict";
 
-  const STORAGE_KEY = "xyka-mix-lab:v1";
+  const STORAGE_KEY = "xyka-mix-lab:v2";
+  const LEGACY_STORAGE_KEY = "xyka-mix-lab:v1";
   const inventory = JSON.parse(document.getElementById("inventory-data").textContent);
   const recipes = JSON.parse(document.getElementById("recipes-data").textContent);
   const assets = JSON.parse(document.getElementById("asset-data").textContent);
@@ -47,14 +48,26 @@
   function readStoredState() {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-      return saved ? JSON.parse(saved) : null;
+      if (saved) return { state: JSON.parse(saved), legacy: false };
+      const legacy = localStorage.getItem(LEGACY_STORAGE_KEY);
+      return legacy ? { state: JSON.parse(legacy), legacy: true } : { state: null, legacy: false };
     } catch (error) {
       storageHealthy = false;
-      return null;
+      return { state: null, legacy: false };
     }
   }
 
-  let state = window.XykaCore.normalizeState(readStoredState(), catalogs);
+  const stored = readStoredState();
+  let state = stored.legacy
+    ? window.XykaCore.migrateLegacyPantryState(stored.state, catalogs)
+    : window.XykaCore.normalizeState(stored.state, catalogs);
+  if (stored.legacy && storageHealthy) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (error) {
+      storageHealthy = false;
+    }
+  }
 
   const el = {
     storageNotice: document.getElementById("storage-notice"),
@@ -66,18 +79,13 @@
     changeDirection: document.getElementById("change-direction"),
     strengthStep: document.getElementById("strength-step"),
     strengthOptions: document.getElementById("strength-options"),
-    findButton: document.getElementById("find-button"),
-    findCount: document.getElementById("find-count"),
     randomButton: document.getElementById("random-button"),
     searchInput: document.getElementById("search-input"),
     clearSearch: document.getElementById("clear-search"),
     componentFilter: document.getElementById("component-filter"),
-    confidenceFilter: document.getElementById("confidence-filter"),
     resultsPanel: document.getElementById("results-panel"),
     resultsSummary: document.getElementById("results-summary"),
     exactResults: document.getElementById("exact-results"),
-    nearestSection: document.getElementById("nearest-section"),
-    nearestResults: document.getElementById("nearest-results"),
     pantryList: document.getElementById("pantry-list"),
     pantryCount: document.getElementById("pantry-count"),
     restorePantry: document.getElementById("restore-pantry"),
@@ -132,21 +140,8 @@
       strength: state.strength,
       availableIds: availableSet(),
       componentCount: state.componentCount,
-      confidence: state.confidence,
     });
     return window.XykaCore.searchRecipes(filtered, state.query, inventoryById);
-  }
-
-  function nearestRecipes() {
-    if (!state.direction || state.strength === "любая") return [];
-    const nearest = window.XykaCore.findNearestByStrength(recipes, {
-      direction: state.direction,
-      strength: state.strength,
-      availableIds: availableSet(),
-      componentCount: state.componentCount,
-      confidence: state.confidence,
-    });
-    return window.XykaCore.searchRecipes(nearest, state.query, inventoryById).slice(0, 6);
   }
 
   function renderSelection() {
@@ -181,7 +176,6 @@
         strength: label,
         availableIds: availableSet(),
         componentCount: "любое",
-        confidence: "любая",
       }).length;
       return `<button type="button" class="strength-option tone-${meta.tone}${state.strength === label ? " active" : ""}" data-strength="${escapeHtml(label)}" aria-pressed="${state.strength === label}" aria-label="${escapeHtml(meta.label)}, ${count} ${plural(count, "микс", "микса", "миксов")}">
         <img src="${assets[meta.asset]}" alt=""><strong>${escapeHtml(meta.label)}</strong><small>${count}</small>
@@ -209,7 +203,7 @@
     return recipe.components.map((component) => {
       const item = inventoryById.get(component.tobaccoId);
       return `<div class="component-row${detailed ? " detailed" : ""}" style="--ingredient:${item.visualColor}">
-        <img src="${assets[item.iconKey]}" alt=""><div class="component-copy"><span>${escapeHtml(item.shortName)}</span>${detailed ? `<small>${escapeHtml(item.hook)}</small>` : ""}<i style="--share:${component.percent}%;--ingredient:${item.visualColor}"></i></div>
+        <img src="${assets[item.iconKey]}" alt=""><div class="component-copy"><span><b>${escapeHtml(item.brand)}</b> — ${escapeHtml(item.name)}</span>${detailed ? `<small>${escapeHtml(item.hook)}</small>` : ""}<i style="--share:${component.percent}%;--ingredient:${item.visualColor}"></i></div>
         <strong>${component.percent}%${detailed ? ` <small>${String(component.grams.toFixed(1)).replace(".", ",")} г</small>` : ""}</strong>
       </div>`;
     }).join("");
@@ -221,8 +215,8 @@
     return `<article class="recipe-card" data-recipe-card="${escapeHtml(recipe.id)}">
       <button type="button" class="recipe-card-button" data-recipe-open="${escapeHtml(recipe.id)}" aria-label="Открыть микс ${escapeHtml(recipe.name)}">
         <div class="card-visual">${compositionVisual(recipe)}</div>
-        <div class="card-copy"><div class="recipe-topline">${strengthBadge(recipe)}<span class="confidence-badge">${escapeHtml(recipe.confidence)} уверенность</span></div>
-          <h3 class="recipe-title">${escapeHtml(recipe.name)}</h3><p class="recipe-hook">${escapeHtml(recipe.hook)}</p><div class="component-list">${componentRows(recipe)}</div>
+        <div class="card-copy"><div class="recipe-topline">${strengthBadge(recipe)}</div>
+          <h3 class="recipe-title">${escapeHtml(recipe.name)}</h3><div class="component-list">${componentRows(recipe)}</div>
         </div>
       </button>
       <div class="card-actions"><button type="button" class="icon-button favorite${favorites.has(recipe.id) ? " active" : ""}" data-favorite="${escapeHtml(recipe.id)}" aria-pressed="${favorites.has(recipe.id)}" aria-label="${favorites.has(recipe.id) ? "Убрать из избранного" : "Добавить в избранное"}">${ICONS.heart}</button>
@@ -245,14 +239,10 @@
   function renderResults() {
     if (!state.direction) return;
     const exact = exactRecipes();
-    const nearest = exact.length < 6 ? nearestRecipes() : [];
-    el.findCount.textContent = exact.length ? `${exact.length} ${plural(exact.length, "микс", "микса", "миксов")}` : "нет совпадений";
     const strengthText = state.strength === "любая" ? "любая крепость" : state.strength.toLocaleLowerCase("ru-RU");
     el.resultsSummary.textContent = `${DIRECTION_LABELS[state.direction]}, ${strengthText}. Найдено ${exact.length}.`;
     el.clearSearch.hidden = !state.query;
     replaceTrustedMarkup(el.exactResults, exact.length ? exact.map(recipeCard).join("") : emptyState("Совпадений нет", "Очистите поиск, верните ингредиенты на полку или ослабьте точные фильтры."));
-    el.nearestSection.hidden = !(exact.length < 6 && nearest.length);
-    replaceTrustedMarkup(el.nearestResults, nearest.map(recipeCard).join(""));
   }
 
   function renderPantry() {
@@ -301,7 +291,6 @@
     renderNavigation();
     el.searchInput.value = state.query;
     el.componentFilter.value = String(state.componentCount);
-    el.confidenceFilter.value = state.confidence;
   }
 
   function setView(view) {
@@ -325,17 +314,56 @@
     announce(adding ? "Микс отмечен" : "Отметка снята");
   }
 
-  function renderNoteLevel(label, notes) {
-    return `<div class="note-level"><span>${label}</span><strong>${escapeHtml(notes.join(", "))}</strong></div>`;
+  function polarPoint(radius, angle) {
+    const radians = angle * Math.PI / 180;
+    return { x: 150 + radius * Math.cos(radians), y: 150 + radius * Math.sin(radians) };
   }
 
-  function renderPackingSteps(recipe) {
-    return recipe.packing.steps.map((step) => {
-      const stepItems = step.tobaccoIds.map((id) => inventoryById.get(id)).filter(Boolean);
-      const icons = stepItems.map((item) => `<img src="${assets[item.iconKey]}" alt="">`).join("");
-      const names = stepItems.map((item) => item.shortName).join(" + ");
-      return `<li><span class="packing-order">${step.order}</span><div class="packing-icons">${icons}</div><div><strong>${escapeHtml(names)}</strong><p>${escapeHtml(step.placement)}</p><small>${escapeHtml(step.reason)}</small></div></li>`;
+  function sectorPath(sector) {
+    const start = polarPoint(92, sector.startAngle);
+    const end = polarPoint(92, sector.endAngle);
+    const largeArc = sector.endAngle - sector.startAngle > 180 ? 1 : 0;
+    return `M 150 150 L ${start.x.toFixed(3)} ${start.y.toFixed(3)} A 92 92 0 ${largeArc} 1 ${end.x.toFixed(3)} ${end.y.toFixed(3)} Z`;
+  }
+
+  function renderSectorPacking(recipe) {
+    const sectors = window.XykaCore.sectorGeometry(recipe.packing.layout.sectors);
+    const aria = sectors.map((sector) => {
+      const item = inventoryById.get(sector.tobaccoId);
+      return `${item.brand} — ${item.name}: ${sector.percent}%`;
+    }).join("; ");
+    const paths = sectors.map((sector) => {
+      const item = inventoryById.get(sector.tobaccoId);
+      return `<path class="packing-sector-slice" d="${sectorPath(sector)}" style="fill:${item.visualColor}"/>`;
     }).join("");
+    const leaders = sectors.map((sector) => `<line class="packing-sector-leader" x1="${sector.leaderStart.x.toFixed(2)}" y1="${sector.leaderStart.y.toFixed(2)}" x2="${sector.leaderEnd.x.toFixed(2)}" y2="${sector.leaderEnd.y.toFixed(2)}"/>`).join("");
+    const labels = sectors.map((sector) => {
+      const item = inventoryById.get(sector.tobaccoId);
+      const { labelPoint, iconPoint } = sector;
+      return `<g class="packing-sector-label" transform="translate(${labelPoint.x.toFixed(2)} ${labelPoint.y.toFixed(2)})"><rect x="-21" y="-12" width="42" height="24" rx="12"/><text y="4" text-anchor="middle">${sector.percent}%</text></g>
+        <g class="packing-sector-icon" transform="translate(${iconPoint.x.toFixed(2)} ${iconPoint.y.toFixed(2)})"><circle class="packing-sector-icon-plate" r="18"/><image href="${assets[item.iconKey]}" x="-14" y="-14" width="28" height="28" preserveAspectRatio="xMidYMid meet"/></g>`;
+    }).join("");
+    return `<div class="packing-sector-diagram" role="img" aria-label="Капсула сверху. ${escapeHtml(aria)}"><svg viewBox="0 0 300 300" aria-hidden="true">${paths}<circle class="packing-sector-outline" cx="150" cy="150" r="92"/>${leaders}${labels}</svg></div>`;
+  }
+
+  function renderLayerPacking(recipe) {
+    const layers = window.XykaCore.layerGeometry(recipe);
+    const aria = layers.map((layer) => `${layer.position}: ${layer.segments.map((segment) => {
+      const item = inventoryById.get(segment.tobaccoId);
+      return `${item.brand} — ${item.name} ${segment.percent}%`;
+    }).join(", ")}`).join("; ");
+    const rows = layers.map((layer) => `<div class="packing-layer" style="--layer-height:${layer.heightPercent}%" data-position="${escapeHtml(layer.position)}">${layer.segments.map((segment) => {
+      const item = inventoryById.get(segment.tobaccoId);
+      return `<div class="packing-layer-segment" style="--segment-width:${segment.widthPercent}%;--ingredient:${item.visualColor}"><img src="${assets[item.iconKey]}" alt=""><strong>${segment.percent}%</strong></div>`;
+    }).join("")}</div>`).join("");
+    return `<div class="packing-layer-diagram" role="img" aria-label="Капсула сбоку. ${escapeHtml(aria)}"><div class="packing-heater"><span>Нагреватель</span></div><div class="packing-capsule">${rows}</div><span class="packing-distance">Дальше от нагревателя</span></div>`;
+  }
+
+  function renderPacking(recipe) {
+    const type = recipe.packing.layout.type;
+    if (type === "sectors") return renderSectorPacking(recipe);
+    if (type === "layers") return `<p class="packing-intro layer-explanation">${escapeHtml(recipe.packing.instructions)}</p>${renderLayerPacking(recipe)}`;
+    return `<p class="packing-intro">${escapeHtml(recipe.packing.instructions)}</p>`;
   }
 
   function renderRecipeDetail(recipeId) {
@@ -343,12 +371,11 @@
     if (!recipe) return;
     const favorites = new Set(state.favoriteIds);
     const tried = new Set(state.triedIds);
-    replaceTrustedMarkup(el.recipeDetail, `<header class="detail-header"><div class="detail-hero">${compositionVisual(recipe, "detail")}<div><div class="recipe-topline">${strengthBadge(recipe)}<span class="confidence-badge">${escapeHtml(recipe.confidence)} уверенность</span></div><h2 id="drawer-title">${escapeHtml(recipe.name)}</h2><p>${escapeHtml(recipe.hook)}</p></div></div></header>
+    replaceTrustedMarkup(el.recipeDetail, `<header class="detail-header"><div class="detail-hero">${compositionVisual(recipe, "detail")}<div><div class="recipe-topline">${strengthBadge(recipe)}</div><h2 id="drawer-title">${escapeHtml(recipe.name)}</h2></div></div></header>
       <div class="detail-grid">
         <section class="detail-section composition-section"><span class="section-kicker">На 10 граммов</span><h3>Состав</h3><div class="detail-components">${componentRows(recipe, true)}</div></section>
         <section class="detail-section"><span class="section-kicker">Вкус</span><h3>Как звучит микс</h3><p>${escapeHtml(recipe.whyItWorks)}</p><div class="taste-timeline"><div><strong>Старт</strong><p>${escapeHtml(recipe.taste.start)}</p></div><div><strong>Середина</strong><p>${escapeHtml(recipe.taste.middle)}</p></div><div><strong>Послевкусие</strong><p>${escapeHtml(recipe.taste.aftertaste)}</p></div></div></section>
-        <section class="detail-section wide"><span class="section-kicker">Пирамида</span><h3>Ноты</h3><div class="note-pyramid">${renderNoteLevel("Верхние", recipe.notePyramid.top)}${renderNoteLevel("Средние", recipe.notePyramid.heart)}${renderNoteLevel("Нижние", recipe.notePyramid.base)}</div></section>
-        <section class="detail-section wide"><span class="section-kicker">Метод: ${escapeHtml(recipe.packing.method)}</span><h3>Как забить капсулу</h3><p class="packing-intro">${escapeHtml(recipe.packing.instructions)}</p><div class="orientation-card"><p>${escapeHtml(recipe.packing.orientation.firstInCapsule)}</p><p>${escapeHtml(recipe.packing.orientation.lastInCapsule)}</p></div><ol class="packing-steps">${renderPackingSteps(recipe)}</ol><p class="airflow-check">${escapeHtml(recipe.packing.airflowCheck)}</p></section>
+        <section class="detail-section wide packing-section"><span class="section-kicker">Метод: ${escapeHtml(recipe.packing.method)}</span><h3>Как забить капсулу</h3>${renderPacking(recipe)}</section>
         <section class="detail-section wide"><span class="section-kicker">XYKA PRO</span><h3>Температура</h3><div class="temperature-row"><div><strong>${recipe.heat.startC} °C</strong><span>Старт</span></div><div><strong>${recipe.heat.workC} °C</strong><span>Рабочая</span></div></div><p>${escapeHtml(recipe.heat.warmup)}</p><small>${escapeHtml(recipe.heat.adjustment)}</small></section>
       </div>
       <div class="detail-actions"><button type="button" class="secondary-action" data-favorite="${escapeHtml(recipe.id)}">${ICONS.heart}<span>${favorites.has(recipe.id) ? "В избранном" : "В избранное"}</span></button><button type="button" class="secondary-action" data-tried="${escapeHtml(recipe.id)}">${ICONS.check}<span>${tried.has(recipe.id) ? "Пробовал" : "Отметить пробу"}</span></button></div>`);
@@ -390,12 +417,6 @@
       state.strength = "любая";
       saveState(); renderSelection(); renderDirections();
       el.directionStep.querySelector("button")?.focus();
-      return;
-    }
-    if (action === "find") {
-      renderResults();
-      el.resultsPanel.scrollIntoView({ behavior: "smooth", block: "start" });
-      announce(`Найдено ${exactRecipes().length} миксов`);
       return;
     }
     if (action === "random") {
@@ -455,7 +476,6 @@
   el.searchInput.addEventListener("compositionend", () => { composingSearch = false; state.query = el.searchInput.value; saveState(); renderResults(); });
   el.searchInput.addEventListener("input", () => { if (composingSearch) return; state.query = el.searchInput.value; saveState(); renderResults(); });
   el.componentFilter.addEventListener("change", () => { state.componentCount = el.componentFilter.value === "любое" ? "любое" : Number(el.componentFilter.value); saveState(); renderResults(); });
-  el.confidenceFilter.addEventListener("change", () => { state.confidence = el.confidenceFilter.value; saveState(); renderResults(); });
   document.addEventListener("keydown", (event) => {
     if (el.drawer.hidden) return;
     if (event.key === "Escape") { closeDrawer(); return; }

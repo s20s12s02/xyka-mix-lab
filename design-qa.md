@@ -1,42 +1,36 @@
 # Design QA — MixLab
 
-## Visual target and implementation
+## Результат
 
-- Source visual: `/Users/ssshevtsov/.codex/generated_images/01a02b62-d7f9-7053-8d88-80f3ec0172a4/exec-b60eaa6a-0600-48a5-8e4b-ccff75a1fcd5.png`, 853×1844 px. For like-for-like review it was normalized to 427×922 px.
-- Implementation: `qa/mixlab-427-visual-target.png`, 427×922 px, light theme, direction `Ягоды`, strength `любая`, shelf 26/26.
-- Combined comparison input: `qa/design-comparison-427.png`.
-- Dark-theme evidence: `qa/mixlab-427-dark.png`, 427×922 px, same selected state.
-- Additional viewport evidence: `qa/mixlab-final-preview.png`, `qa/mixlab-375-selection.png`, `qa/mixlab-390-initial.png`, `qa/mixlab-390-selection.png`, `qa/mixlab-390-detail.png`, `qa/mixlab-390-packing.png`, `qa/mixlab-1440-selection.png`.
+Интерфейс сохраняет журнально-лабораторный характер, но выдача теперь появляется автоматически после выбора направления и крепости. Кнопки «Подобрать» и фильтра уверенности нет; единственное утилитарное действие рядом с результатами — контурный «Случайный».
 
-## Comparison
+Карточка показывает говорящее название, `бренд — официальное название вкуса`, проценты и граммы. Рецептный hook и краткое описание удалены; drawer сохраняет подробный раздел «Как звучит микс», но не дублирует его пирамидой нот. Служебные происхождение, адаптация, score и источники не выводятся.
 
-- Visual language matches the selected calm editorial/laboratory direction: warm paper, condensed display face, plum action color, hairline dividers and engraving assets.
-- The implementation intentionally gives the sequential flow more vertical space than the concept image: after direction selection, strength remains the primary task; results stay below and the `Подобрать` action scrolls to them.
-- The selected direction stays visible, `Не важно` is selected by default, and strength uses real smoke assets plus semantic color.
-- Result cards retain the reference signature of a composition ring around ingredient artwork, while adding exact percentage segments, stable ingredient colors and the required component legend.
-- Dark theme preserves the same hierarchy and puts engraved direction, ingredient and smoke imagery on light neutral plates.
+## Наглядная укладка
 
-## Findings and correction history
+- `sectors`: круглая SVG-капсула сверху; каждый компонент присутствует один раз, углы соответствуют долям, сумма — 100%, проценты центрированы внутри долей, а иконки вынесены наружу на светлые подложки с линиями-выносками.
+- `layers`: капсула сбоку; высота каждого слоя пропорциональна его суммарной доле, сегменты слоя подписаны процентами. Пояснение фиксирует физический порядок: верхний на схеме слой кладут первым на дно, после переворота он оказывается у нагревателя. Однослойный вариант невозможен по данным и тесту.
+- `compote`: одна короткая инструкция без декоративной псевдосхемы.
+
+В пользовательских текстах отсутствуют «Отвесьте 10 г», «самый яркий акцент — у края», «остаётся отделённым…» и секторные псевдошаги.
+
+## Исправления этого этапа
 
 | Severity | Finding | Correction | Recheck |
 |---|---|---|---|
-| P1 | The hidden drawer was visible on first load because a later `.drawer { display: grid }` rule overrode `[hidden]`. | Raised hidden-selector specificity to `[hidden][hidden]`; added a regression test. | Passed at 390×844 and after reload. |
-| P2 | At 375 px the primary CTA split `Подобрать` into three lines. | Preserved words at 390 px and stacked actions below 380 px; added a regression test. | Passed at 375×844 with zero horizontal overflow. |
-| P2 | Generated titles used repetitive long fillers such as `с нотой` and `в оттенках`. | Added 32 curated thematic names per internal direction while deriving IDs from the legacy title; compositions and IDs remain unchanged. | 216 unique titles, max 42 characters; stable fingerprint passed. |
-| P2 | Smoke engravings had insufficient dark-theme contrast. | Added a neutral light plate only in dark mode; added a regression test. | Computed plate `rgb(255, 250, 243)` and visual check passed. |
+| P1 | Автономная сборка не экспортировала `sectorGeometry`/`layerGeometry`, поэтому drawer падал при открытии схемы. | Синхронизирован `CORE_EXPORTS`, добавлен build-регрессионный тест. | Секторная и слоистая карточки открыты в браузере; console 0/0. |
+| P2 | Названия-перечни и рецептные hook-блоки дублировали состав и перегружали карточку. | Для всех 101 ID закреплены говорящие названия; recipe hook удалён из генератора, поиска, карточки и drawer. | Все строки входят в редакционную QA-матрицу; build-тест требует отсутствия hook-разметки и секции «Ноты». |
+| P2 | Иконки терялись на цветных секторах, а проценты пересекались с внешним контуром. | Проценты перенесены на внутренний радиус; иконки — на внешнюю орбиту со светлой подложкой и выноской. | Core-тест проверяет внутреннюю/внешнюю геометрию; схема просмотрена в Chrome при 390 px, подписи и контур не пересекаются. |
 
-No open P0, P1 or P2 findings remain.
+Открытых P0, P1 и P2 нет.
 
-## Interaction and accessibility evidence
+## Interaction и accessibility
 
-- Sequential direction → strength → results flow, `Не важно`, individual strength counts and `Подобрать` were exercised in the in-app browser.
-- Search was exercised against a recipe title, a tobacco description/hook and note-pyramid text with AND-token normalization.
-- Drawer Escape, inert background, scroll lock, restored trigger focus, detailed packing content, favorites, tried log and pantry rendering were exercised.
-- Visible interactive controls measured at least 44 px at 390 px; no horizontal overflow was found at 375, 390, 427 or 1440 px.
-- Browser console warnings/errors: none. External DOM URLs: none.
-- Strict premium UI audit: 0 findings. Design.md lint: 0 errors and 0 warnings.
-- The in-app browser security policy blocks direct `file://` navigation, so that runtime check could not be executed through the selected browser. The autonomous artifact is covered by build tests, embedded-data/asset checks, absence-of-network checks and byte identity between `index.html` and the versioned `dist` file.
+- Направление → крепость → результаты проверены без отдельного submit-действия; нулевые крепости скрыты, ненулевые доступны.
+- Drawer поддерживает Escape, inert-фон, scroll lock и возврат фокуса к исходной карточке.
+- Горизонтальный overflow равен 0 px на 375, 390, 427 и 1440 px; интерактивные элементы не меньше 44 px.
+- Проверены светлая/тёмная темы, клавиатура и `prefers-reduced-motion`.
+- Strict premium UI audit: 0 findings; обязательные anti-pattern searches не нашли нативных диалогов или несемантических click-targets.
+- `file://` загрузка подтверждена headless Chrome; console errors/warnings — 0, внешних запросов — 0.
 
-## Final result
-
-Visual and interaction QA passed for the approved redesign, with the single documented `file://` tool limitation above.
+Скриншоты и полный протокол находятся в `qa/README.md`.

@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-08-22",
+  "checkedAt": "2026-08-23",
   "sources": [
     {
       "id": "xyka-manual",
@@ -12,7 +12,7 @@
       "id": "xyka-packings",
       "tier": 1,
       "title": "XYKA — #XYKA_забивки",
-      "url": "https://t.me/s/xyka_pro?q=%23XYKA_%D0%B7%D0%B0%D0%B8%D0%B2%D0%BA%D0%B8",
+      "url": "https://t.me/s/xyka_pro?q=%23XYKA_%D0%B7%D0%B0%D0%B1%D0%B8%D0%B2%D0%BA%D0%B8",
       "usedFor": ["стартовая температура", "догрев", "рабочая температура по линейкам"]
     },
     {
@@ -21,6 +21,27 @@
       "title": "#ванязабей",
       "url": "https://t.me/s/vanyazabeygroop",
       "usedFor": ["вкусовые идеи", "пропорции", "роли компонентов", "секторная укладка"]
+    },
+    {
+      "id": "smoky-trip",
+      "tier": 4,
+      "title": "Smoky Trip",
+      "url": "https://t.me/s/smoky_trip",
+      "usedFor": ["поиск миксов по текущей полке", "ягодно-десертные связки", "акцентные доли"]
+    },
+    {
+      "id": "hookah4russian",
+      "tier": 4,
+      "title": "Кальян для Россиян",
+      "url": "https://t.me/s/hookah4russian",
+      "usedFor": ["поиск по слову микс", "адаптация ягодно-цветочной формулы №9640"]
+    },
+    {
+      "id": "bjorkhookah",
+      "tier": 4,
+      "title": "BJØRK Кальянный блог",
+      "url": "https://t.me/s/bjorkhookah",
+      "usedFor": ["поиск по слову микс", "чайные и необычные связки"]
     },
     {
       "id": "htreviews",

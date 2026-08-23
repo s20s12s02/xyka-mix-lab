@@ -30,6 +30,16 @@
     "heatRank": 2,
     "visualColor": "#D9A441",
     "iconKey": "tobacco:sebero-honey-melon",
+    "copy": {
+      "titleTerm": "Медовая дыня",
+      "titleTokens": [
+        "Медовая дыня",
+        "медовая дыня",
+        "дыня",
+        "мёд"
+      ],
+      "sensoryRole": "даёт сочную дыню и мягкий медовый шлейф"
+    },
     "warnings": [],
     "rating": {
       "value": 4.5,
@@ -79,6 +89,16 @@
     "heatRank": 2,
     "visualColor": "#D9676B",
     "iconKey": "tobacco:sebero-strawberry",
+    "copy": {
+      "titleTerm": "Клубника",
+      "titleTokens": [
+        "Клубника",
+        "клубника",
+        "клубника",
+        "ягода"
+      ],
+      "sensoryRole": "отвечает за спелую сладость и сочную мякоть"
+    },
     "warnings": [],
     "rating": null,
     "calibrationNote": "Светлая линейка; пользовательские отзывы размещают вкус внутри лёгкого диапазона, без повышения по маркетинговой категории.",
@@ -124,6 +144,16 @@
     "heatRank": 2,
     "visualColor": "#C7A337",
     "iconKey": "tobacco:sebero-energetik",
+    "copy": {
+      "titleTerm": "Энергетик",
+      "titleTokens": [
+        "Энергетик",
+        "энергетик",
+        "энергетик",
+        "напиток"
+      ],
+      "sensoryRole": "добавляет бодрую сладко-кислую ноту напитка"
+    },
     "warnings": [],
     "rating": {
       "value": 4.4,
@@ -175,6 +205,16 @@
     "heatRank": 2,
     "visualColor": "#B76A4A",
     "iconKey": "tobacco:sebero-watermelon-melon-cola",
+    "copy": {
+      "titleTerm": "Арбузная кола",
+      "titleTokens": [
+        "Арбузная кола",
+        "арбузная кола",
+        "арбуз",
+        "дыня"
+      ],
+      "sensoryRole": "соединяет арбуз, дыню и округлую колу"
+    },
     "warnings": [],
     "rating": {
       "value": 4.0,
@@ -225,6 +265,16 @@
     "heatRank": 2,
     "visualColor": "#D7B94A",
     "iconKey": "tobacco:jent-lemon-pie",
+    "copy": {
+      "titleTerm": "Лимонный пирог",
+      "titleTokens": [
+        "Лимонный пирог",
+        "лимонный пирог",
+        "лимон",
+        "пирог"
+      ],
+      "sensoryRole": "приносит лимонный крем и тёплую выпечку"
+    },
     "warnings": [],
     "rating": {
       "value": 4.6,
@@ -274,6 +324,16 @@
     "heatRank": 2,
     "visualColor": "#E2C94B",
     "iconKey": "tobacco:jent-tropez",
+    "copy": {
+      "titleTerm": "Лимон Tropez",
+      "titleTokens": [
+        "Лимон Tropez",
+        "лимон Tropez",
+        "лимон",
+        "цедра"
+      ],
+      "sensoryRole": "поднимает чистую лимонную кислоту и цедру"
+    },
     "warnings": [],
     "rating": {
       "value": 4.6,
@@ -325,6 +385,16 @@
     "heatRank": 2,
     "visualColor": "#8A604C",
     "iconKey": "tobacco:sapphire-italian-tiramisu",
+    "copy": {
+      "titleTerm": "Тирамису",
+      "titleTokens": [
+        "Тирамису",
+        "тирамису",
+        "тирамису",
+        "кофе"
+      ],
+      "sensoryRole": "укладывает кофейный крем, какао и печенье"
+    },
     "warnings": [],
     "rating": {
       "value": 4.4,
@@ -375,6 +445,16 @@
     "heatRank": 2,
     "visualColor": "#A94D5F",
     "iconKey": "tobacco:sapphire-redberry",
+    "copy": {
+      "titleTerm": "Брусника",
+      "titleTokens": [
+        "Брусника",
+        "красная ягода",
+        "брусника",
+        "красная ягода"
+      ],
+      "sensoryRole": "даёт терпкую красную ягоду с кислинкой"
+    },
     "warnings": [],
     "rating": {
       "value": 4.4,
@@ -426,6 +506,16 @@
     "heatRank": 3,
     "visualColor": "#E08A45",
     "iconKey": "tobacco:xperience-multy-fruity",
+    "copy": {
+      "titleTerm": "Тропики",
+      "titleTokens": [
+        "Тропики",
+        "тропический мультифрукт",
+        "манго",
+        "папайя"
+      ],
+      "sensoryRole": "наполняет микс манго, папайей и гуавой"
+    },
     "warnings": [],
     "rating": {
       "value": 4.5,
@@ -477,6 +567,16 @@
     "heatRank": 2,
     "visualColor": "#D26A8A",
     "iconKey": "tobacco:severny-pink-flamingo",
+    "copy": {
+      "titleTerm": "Розовый Фламинго",
+      "titleTokens": [
+        "Розовый Фламинго",
+        "розовый фламинго",
+        "грейпфрут",
+        "малина"
+      ],
+      "sensoryRole": "смешивает грейпфрут, малину, клубнику и личи"
+    },
     "warnings": [],
     "rating": {
       "value": 4.3,
@@ -528,6 +628,16 @@
     "heatRank": 2,
     "visualColor": "#A5A36C",
     "iconKey": "tobacco:severny-white-tea",
+    "copy": {
+      "titleTerm": "Белый чай",
+      "titleTokens": [
+        "Белый чай",
+        "белый чай",
+        "белый чай",
+        "курага"
+      ],
+      "sensoryRole": "связывает мягкий чай, фрукты и курагу"
+    },
     "warnings": [],
     "rating": {
       "value": 4.6,
@@ -578,6 +688,16 @@
     "heatRank": 2,
     "visualColor": "#796755",
     "iconKey": "tobacco:severny-chifir",
+    "copy": {
+      "titleTerm": "Чифир",
+      "titleTokens": [
+        "Чифир",
+        "сладкий чифир",
+        "чёрный чай",
+        "сладость"
+      ],
+      "sensoryRole": "собирает насыщенный чёрный чай со сладким телом"
+    },
     "warnings": [],
     "rating": {
       "value": 4.6,
@@ -628,6 +748,16 @@
     "heatRank": 2,
     "visualColor": "#B94F68",
     "iconKey": "tobacco:severny-raspberry-ruby",
+    "copy": {
+      "titleTerm": "Малиновый Руби",
+      "titleTokens": [
+        "Малиновый Руби",
+        "малиновый руби",
+        "малина",
+        "земляника"
+      ],
+      "sensoryRole": "ведёт малиной, земляникой и лёгким киви"
+    },
     "warnings": [],
     "rating": {
       "value": 4.2,
@@ -678,6 +808,16 @@
     "heatRank": 3,
     "visualColor": "#A74B56",
     "iconKey": "tobacco:trofimoffs-wild-strawberry",
+    "copy": {
+      "titleTerm": "Земляника",
+      "titleTokens": [
+        "Земляника",
+        "дикая земляника",
+        "земляника",
+        "burley"
+      ],
+      "sensoryRole": "оставляет натуральную землянику и сухой Burley"
+    },
     "warnings": [],
     "rating": {
       "value": 4.5,
@@ -727,6 +867,16 @@
     "heatRank": 3,
     "visualColor": "#C78391",
     "iconKey": "tobacco:dogma-sakura",
+    "copy": {
+      "titleTerm": "Сакура",
+      "titleTokens": [
+        "Сакура",
+        "сакура",
+        "сакура",
+        "цветы"
+      ],
+      "sensoryRole": "добавляет цветочную мягкость и сухой сигарный фон"
+    },
     "warnings": [],
     "rating": {
       "value": 4.4,
@@ -777,6 +927,16 @@
     "heatRank": 3,
     "visualColor": "#9F4054",
     "iconKey": "tobacco:dogma-klubyana",
+    "copy": {
+      "titleTerm": "Клубяна",
+      "titleTokens": [
+        "Клубяна",
+        "клубяна",
+        "клубника",
+        "земляника"
+      ],
+      "sensoryRole": "уплотняет клубнично-земляничную ароматику"
+    },
     "warnings": [],
     "rating": {
       "value": 4.4,
@@ -828,6 +988,16 @@
     "heatRank": 3,
     "visualColor": "#776A66",
     "iconKey": "tobacco:dogma-gerlinad",
+    "copy": {
+      "titleTerm": "Герлинад",
+      "titleTokens": [
+        "Герлинад",
+        "герлинад",
+        "парфюм",
+        "травы"
+      ],
+      "sensoryRole": "проводит сухую травяную парфюмерность и древесность"
+    },
     "warnings": [
       "Использовать как яркий акцент: профиль может быстро доминировать."
     ],
@@ -880,6 +1050,16 @@
     "heatRank": 3,
     "visualColor": "#69506F",
     "iconKey": "tobacco:dogma-black-currant",
+    "copy": {
+      "titleTerm": "Смородина",
+      "titleTokens": [
+        "Смородина",
+        "чёрная смородина",
+        "чёрная смородина",
+        "терпкость"
+      ],
+      "sensoryRole": "добавляет терпкую кожицу и сухой ягодный сок"
+    },
     "warnings": [],
     "rating": {
       "value": 4.6,
@@ -931,6 +1111,16 @@
     "heatRank": 3,
     "visualColor": "#55445F",
     "iconKey": "tobacco:dogma-izhevika",
+    "copy": {
+      "titleTerm": "Ижевика",
+      "titleTokens": [
+        "Ижевика",
+        "ижевика",
+        "ежевика",
+        "тёмная ягода"
+      ],
+      "sensoryRole": "затемняет профиль кисло-терпкой ягодой"
+    },
     "warnings": [],
     "rating": {
       "value": 4.6,
@@ -982,6 +1172,16 @@
     "heatRank": 3,
     "visualColor": "#8A7194",
     "iconKey": "tobacco:dogma-krymskaya-lavanda",
+    "copy": {
+      "titleTerm": "Лаванда",
+      "titleTokens": [
+        "Лаванда",
+        "крымская лаванда",
+        "лаванда",
+        "цветы"
+      ],
+      "sensoryRole": "оставляет сухой цветочно-травяной штрих лаванды"
+    },
     "warnings": [
       "Цветочный аллерген: при чувствительности к лаванде рецепт не использовать.",
       "Доля выше 25% может перекрыть остальные ноты."
@@ -1037,6 +1237,16 @@
     "heatRank": 3,
     "visualColor": "#537C69",
     "iconKey": "tobacco:banger-evergreen",
+    "copy": {
+      "titleTerm": "Фейхоа и хвоя",
+      "titleTokens": [
+        "Фейхоа и хвоя",
+        "вечнозелёный фейхоа",
+        "фейхоа",
+        "можжевельник"
+      ],
+      "sensoryRole": "соединяет зелёный фейхоа с сухим можжевельником"
+    },
     "warnings": [],
     "rating": {
       "value": 4.5,
@@ -1087,6 +1297,16 @@
     "heatRank": 3,
     "visualColor": "#875743",
     "iconKey": "tobacco:satyr-california-cola",
+    "copy": {
+      "titleTerm": "Кола Satyr",
+      "titleTokens": [
+        "Кола Satyr",
+        "калифорнийская кола",
+        "кола",
+        "специи"
+      ],
+      "sensoryRole": "даёт пряную колу и сухой табачный контур"
+    },
     "warnings": [],
     "rating": {
       "value": 4.5,
@@ -1137,6 +1357,16 @@
     "heatRank": 3,
     "visualColor": "#70483D",
     "iconKey": "tobacco:bonche-brownie",
+    "copy": {
+      "titleTerm": "Брауни",
+      "titleTokens": [
+        "Брауни",
+        "брауни",
+        "брауни",
+        "шоколад"
+      ],
+      "sensoryRole": "укладывает тёмный шоколад, какао и сухой лист"
+    },
     "warnings": [],
     "rating": {
       "value": 4.6,
@@ -1186,6 +1416,16 @@
     "heatRank": 3,
     "visualColor": "#B58C63",
     "iconKey": "tobacco:bonche-cookie",
+    "copy": {
+      "titleTerm": "Печенье",
+      "titleTokens": [
+        "Печенье",
+        "сухое печенье",
+        "печенье",
+        "сливочность"
+      ],
+      "sensoryRole": "добавляет сливочное печенье на крепком листе"
+    },
     "warnings": [],
     "rating": {
       "value": 4.2,
@@ -1237,6 +1477,16 @@
     "heatRank": 3,
     "visualColor": "#B77842",
     "iconKey": "tobacco:bonche-caramel",
+    "copy": {
+      "titleTerm": "Карамель",
+      "titleTokens": [
+        "Карамель",
+        "сухая карамель",
+        "карамель",
+        "жжёный сахар"
+      ],
+      "sensoryRole": "протягивает густую жжёную карамель"
+    },
     "warnings": [
       "Концентрированный модификатор: не превышать 20% в рецепте."
     ],
@@ -1289,6 +1539,16 @@
     "heatRank": 3,
     "visualColor": "#9B7547",
     "iconKey": "tobacco:kraken-medium-seco-peanut",
+    "copy": {
+      "titleTerm": "Арахис",
+      "titleTokens": [
+        "Арахис",
+        "жареный арахис",
+        "арахис",
+        "орех"
+      ],
+      "sensoryRole": "даёт ореховую сухость и поджаренный акцент"
+    },
     "warnings": [
       "Арахис — распространённый пищевой аллерген."
     ],
